@@ -3,7 +3,7 @@
 
     var registration = angular.module('angular-registration');
 
-    registration.directive('passwordResetRequestForm', ['$rootScope', '$http', '$location', '$filter', 'REGISTRATION', 'PROJECT_SETTINGS', function ($rootScope, $http, $location, $filter, REGISTRATION, PROJECT_SETTINGS) {
+    registration.directive('passwordResetRequestForm', ['$rootScope', '$http', '$location', 'REGISTRATION', 'PROJECT_SETTINGS', function ($rootScope, $http, $location, REGISTRATION, PROJECT_SETTINGS) {
         return {
             restrict: 'A',
             scope: true,
@@ -62,7 +62,7 @@
                     scope.fields = response.data.actions.PUT;
                 }, function (response) {
                     if (response.status === 500) {
-                        var resetPath = $filter('reverseurl')('PasswordResetRequestCtrl');
+                        var resetPath = $filter('reverseUrl')('PasswordResetRequestCtrl');
                         if (resetPath.substring(0, 1) === '#') {
                             resetPath = resetPath.substring(1);
                         }
@@ -89,7 +89,7 @@
 
                         // When setting $location.path() the string cannot
                         // start with a '#'
-                        var loginPath = $filter('reverseurl')('LoginCtrl');
+                        var loginPath = $filter('reverseUrl')('LoginCtrl');
                         if (loginPath.substring(0, 1) === '#') {
                             loginPath = loginPath.substring(1);
                         }
@@ -165,7 +165,7 @@
                         if(response.status === 201) {
                             // When setting $location.path() the string cannot
                             // start with a '#'
-                            var loginPath = $filter('reverseurl')('LoginCtrl');
+                            var loginPath = $filter('reverseUrl')('LoginCtrl');
                             if(loginPath.substring(0, 1) === '#') {
                                 loginPath = loginPath.substring(1);
                             }

@@ -1,6 +1,6 @@
 {
   "name": "angular-registration",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/incuna/angular-registration",
   "authors": [
     "Perry Roper <perryroper@gmail.com>"
@@ -14,7 +14,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.10",
-    "angular-route": "~1.2.10"
+    "angular": "~1.2.7",
+    "angular-route": "~1.2.7",
+    "angular-reverse-url": "~1.0.0"
   }
 }

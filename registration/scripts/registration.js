@@ -3,7 +3,8 @@
 
     var registration = angular.module('angular-registration', [
         'project_settings',
-        'ngRoute'
+        'ngRoute',
+        'angular-reverse-url'
     ]);
 
     // Default settings. You can override these in your settings module.
