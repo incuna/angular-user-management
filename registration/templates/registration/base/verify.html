@@ -1,0 +1,14 @@
+<div data-extend-template="templates/unauthenticated_base.html">
+    <div data-block="page-inner">
+        <h1>Verify email</h1>
+
+        <div>
+            <div ng-show="status === 200">
+                <p>Thank you for verifying your account. You may now <a href="{{ 'LoginCtrl'|reverseurl }}">log in</a>.</p>
+            </div>
+            <div ng-hide="status === 200">
+                <p>There was a problem verifying your account, you may have already verified it. Please try <a href="{{ 'LoginCtrl'|reverseurl }}">logging in</a>.</p>
+            </div>
+        </div>
+    </div>
+</div>
