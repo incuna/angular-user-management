@@ -14,8 +14,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.2.7",
-    "angular-route": "~1.2.7",
+    "angular": "~1.2",
+    "angular-route": "~1.2",
     "angular-reverse-url": "~1.0.0"
   }
 }
