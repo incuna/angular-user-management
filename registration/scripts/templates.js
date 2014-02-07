@@ -17,7 +17,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/password_reset_request_form.html',
-    "<div form-field=fields.email><input ng-model=data.email placeholder=Email autofocus></div><div class=form-actions><button type=submit>Reset password</button></div>"
+    "<div form-field=fields.email><input ng-model=data.email type=text placeholder=Email autofocus></div><div class=form-actions><button type=submit>Reset password</button></div>"
   );
 
 
@@ -27,12 +27,12 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/profile_form.html',
-    "<div form-field=fields.name><input ng-model=editUser.name maxlength=\"{{ fields.name.max_length }}\" placeholder=Name></div><div form-field=fields.location><input ng-model=editUser.location maxlength=\"{{ fields.location.max_length }}\" placeholder=Location></div><div form-field=fields.telephone><input type=tel ng-model=editUser.telephone maxlength=\"{{ fields.telephone.max_length }}\" placeholder=Telephone></div><div class=form-actions><button type=submit>Update</button></div>"
+    "<div form-field=fields.name><input type=text ng-model=editUser.name maxlength=\"{{ fields.name.max_length }}\" placeholder=Name></div><div form-field=fields.location><input type=text ng-model=editUser.location maxlength=\"{{ fields.location.max_length }}\" placeholder=Location></div><div form-field=fields.telephone><input type=tel ng-model=editUser.telephone maxlength=\"{{ fields.telephone.max_length }}\" placeholder=Telephone></div><div class=form-actions><button type=submit>Update</button></div>"
   );
 
 
   $templateCache.put('templates/registration/base/register_form.html',
-    "<div form-field=fields.email><input type=email ng-model=user.email maxlength=\"{{ fields.email.max_length }}\" placeholder=\"{{ fields.email.label }}\"></div><div form-field=fields.password><input type=password ng-model=user.password placeholder=\"{{ fields.password.label }}\"></div><div form-field=fields.password2><input type=password ng-model=user.password2 placeholder=\"{{ fields.password2.label }}\"></div><div form-field=fields.name><input ng-model=user.name maxlength=\"{{ fields.name.max_length }}\" placeholder=\"{{ fields.name.label }}\"></div><div form-field=fields.location><input ng-model=user.location maxlength=\"{{ fields.location.max_length }}\" placeholder=\"{{ fields.location.label }}\"></div><div form-field=fields.telephone><input type=tel ng-model=user.telephone maxlength=\"{{ fields.telephone.max_length }}\" placeholder=\"{{ fields.telephone.label }}\"></div><div class=form-actions><button type=submit>Register</button></div>"
+    "<div form-field=fields.email><input type=email ng-model=user.email maxlength=\"{{ fields.email.max_length }}\" placeholder=\"{{ fields.email.label }}\"></div><div form-field=fields.password><input type=password ng-model=user.password placeholder=\"{{ fields.password.label }}\"></div><div form-field=fields.password2><input type=password ng-model=user.password2 placeholder=\"{{ fields.password2.label }}\"></div><div form-field=fields.name><input type=text ng-model=user.name maxlength=\"{{ fields.name.max_length }}\" placeholder=\"{{ fields.name.label }}\"></div><div form-field=fields.location><input type=text ng-model=user.location maxlength=\"{{ fields.location.max_length }}\" placeholder=\"{{ fields.location.label }}\"></div><div form-field=fields.telephone><input type=tel ng-model=user.telephone maxlength=\"{{ fields.telephone.max_length }}\" placeholder=\"{{ fields.telephone.label }}\"></div><div class=form-actions><button type=submit>Register</button></div>"
   );
 
 

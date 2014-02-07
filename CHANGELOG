@@ -1,3 +1,7 @@
+# 0.0.4
+
+* Removed 'removeRedundantAttributes' options in htmlmin.
+
 # 0.0.3
 
 * Depends on angular 1.2.x rather than 1.2.7+.
