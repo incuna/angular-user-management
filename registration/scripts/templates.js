@@ -7,7 +7,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/password_change_form.html',
-    "<div form-field=fields.new_password><input type=password ng-model=data.new_password></div><div form-field=fields.new_password2><input type=password ng-model=data.new_password2></div><div class=form-actions><button type=submit>Set new password</button></div>"
+    "<div form-field=fields.old_password ng-if=fields.old_password><input type=password ng-model=data.old_password placeholder=\"{{ fields.old_password.label }}\"></div><div form-field=fields.new_password><input type=password ng-model=data.new_password></div><div form-field=fields.new_password2><input type=password ng-model=data.new_password2></div><div class=form-actions><button type=submit>Set new password</button></div>"
   );
 
 
@@ -22,7 +22,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/profile.html',
-    "<div data-extend-template=templates/base.html><div data-block=page-breadcrumbs></div><div data-block=page-head-inner>{{ app.page.title }}</div><div data-block=page-body-head></div><div data-block=page-body-content-inner><form profile-form=\"\" ng-submit=editProfile()></form></div></div>"
+    "<div data-extend-template=templates/base.html><div data-block=page-breadcrumbs></div><div data-block=page-head-inner>{{ app.page.title }}</div><div data-block=page-body-head></div><div data-block=page-body-content-inner><form profile-form=\"\" ng-submit=editProfile()></form><form password-change-form=\"\" change-method=update ng-submit=changePassword()></form></div></div>"
   );
 
 

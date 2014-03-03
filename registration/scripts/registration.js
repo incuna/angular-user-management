@@ -13,6 +13,7 @@
         VERIFY_ENDPOINT: '/verify_email/',
         PROFILE_ENDPOINT: '/profile/',
         PASSWORD_RESET_REQUEST_ENDPOINT: '/auth/password_reset/',
-        PASSWORD_CHANGE_ENDPOINT: '/auth/password_reset/confirm/'
+        PASSWORD_CHANGE_ENDPOINT: '/auth/password_reset/confirm/',
+        PASSWORD_UPDATE_ENDPOINT: '/profile/password/'
     });
 }());
