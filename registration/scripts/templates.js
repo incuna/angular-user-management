@@ -7,7 +7,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/password_change_form.html',
-    "<div form-field=fields.new_password><input type=password ng-model=data.new_password></div><div form-field=fields.new_password2><input type=password ng-model=data.new_password2></div><div class=form-actions><button type=submit>Set new password</button></div>"
+    "<div form-field=fields.old_password ng-if=fields.old_password><input type=password ng-model=data.old_password placeholder=fields.old_password.label></div><div form-field=fields.new_password><input type=password ng-model=data.new_password></div><div form-field=fields.new_password2><input type=password ng-model=data.new_password2></div><div class=form-actions><button type=submit>Set new password</button></div>"
   );
 
 
