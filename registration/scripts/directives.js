@@ -9,6 +9,8 @@
             scope: true,
             templateUrl: 'templates/registration/password_reset_request_form.html',
             link: function (scope, element, attrs) {
+                var form = scope['password-reset-request'];
+
                 var MODULE_SETTINGS = angular.extend({}, REGISTRATION, PROJECT_SETTINGS.REGISTRATION);
 
                 scope.fields = {
@@ -17,27 +19,31 @@
                 scope.data = {};
 
                 scope.resetPassword = function () {
-                    angular.forEach(scope.fields, function(value, key){
-                        value.errors = '';
-                    });
-
-                    $http({
-                        method: 'POST',
-                        url: PROJECT_SETTINGS.API_ROOT + MODULE_SETTINGS.PASSWORD_RESET_REQUEST_ENDPOINT,
-                        data: scope.data
-                    }).then(function () {
-                        var email = scope.data.email;
-                        scope.data = {};
-                        // TODO: this should come from the API.
-                        $rootScope.app.page.messages = [{
-                            msg: 'We\'ve sent an email to ' + email + ' that contains a link to reset your password.',
-                            type: 'success'
-                        }];
-                    }, function (response) {
-                        angular.forEach(response.data, function (error, field) {
-                            scope.fields[field].errors = error[0];
+                    if (!form.$pristine) {
+                        angular.forEach(scope.fields, function(value, key){
+                            value.errors = '';
                         });
-                    });
+
+                        $http({
+                            method: 'POST',
+                            url: PROJECT_SETTINGS.API_ROOT + MODULE_SETTINGS.PASSWORD_RESET_REQUEST_ENDPOINT,
+                            data: scope.data
+                        }).then(function () {
+                            var email = scope.data.email;
+                            scope.data = {};
+                            // TODO: this should come from the API.
+                            $rootScope.app.page.messages = [{
+                                msg: 'We\'ve sent an email to ' + email + ' that contains a link to reset your password.',
+                                type: 'success'
+                            }];
+
+                            form.$setPristine();
+                        }, function (response) {
+                            angular.forEach(response.data, function (error, field) {
+                                scope.fields[field].errors = error[0];
+                            });
+                        });
+                    }
                 };
             }
         };
@@ -49,6 +55,8 @@
             scope: true,
             templateUrl: 'templates/registration/password_change_form.html',
             link: function (scope, element, attrs) {
+                var form = scope['password-change'];
+
                 var MODULE_SETTINGS = angular.extend({}, REGISTRATION, PROJECT_SETTINGS.REGISTRATION);
                 var TOKEN = $route.current.pathParams.token;
                 var URL = PROJECT_SETTINGS.API_ROOT + MODULE_SETTINGS.PASSWORD_CHANGE_ENDPOINT + TOKEN + '/';
@@ -81,42 +89,46 @@
                 });
 
                 scope.changePassword = function () {
-                    angular.forEach(scope.fields, function(value, key){
-                        value.errors = '';
-                    });
+                    if (!form.$pristine) {
+                        angular.forEach(scope.fields, function(value, key){
+                            value.errors = '';
+                        });
 
-                    $http({
-                        method: 'PUT',
-                        url: URL,
-                        data: scope.data
-                    }).then(function (response) {
-                        scope.data = {};
+                        $http({
+                            method: 'PUT',
+                            url: URL,
+                            data: scope.data
+                        }).then(function (response) {
+                            scope.data = {};
 
-                        if (attrs.changeMethod === 'update') {
-                            $rootScope.app.page.messages = [{
-                                msg: 'You have successfully changed your password.',
-                                type: 'success'
-                            }];
-                        } else {
-                            // When setting $location.path() the string cannot
-                            // start with a '#'
-                            var loginPath = $filter('reverseUrl')('LoginCtrl');
-                            if (loginPath.substring(0, 1) === '#') {
-                                loginPath = loginPath.substring(1);
+                            if (attrs.changeMethod === 'update') {
+                                $rootScope.app.page.messages = [{
+                                    msg: 'You have successfully changed your password.',
+                                    type: 'success'
+                                }];
+                            } else {
+                                // When setting $location.path() the string cannot
+                                // start with a '#'
+                                var loginPath = $filter('reverseUrl')('LoginCtrl');
+                                if (loginPath.substring(0, 1) === '#') {
+                                    loginPath = loginPath.substring(1);
+                                }
+
+                                $rootScope.nextRouteMessages = [{
+                                    msg: 'You have successfully reset your password. You may now log in below.',
+                                    type: 'success'
+                                }];
+
+                                $location.path(loginPath);
                             }
 
-                            $rootScope.nextRouteMessages = [{
-                                msg: 'You have successfully reset your password. You may now log in below.',
-                                type: 'success'
-                            }];
-
-                            $location.path(loginPath);
-                        }
-                    }, function (response) {
-                        angular.forEach(response.data, function (error, field) {
-                            scope.fields[field].errors = error[0];
+                            form.$setPristine();
+                        }, function (response) {
+                            angular.forEach(response.data, function (error, field) {
+                                scope.fields[field].errors = error[0];
+                            });
                         });
-                    });
+                    }
                 };
             }
         };
@@ -128,6 +140,8 @@
             scope: true,
             templateUrl: 'templates/registration/profile_form.html',
             link: function (scope, element, attrs) {
+                var form = scope['profile'];
+
                 user.options()
                     .then(function (response) {
                         scope.fields = response.data.actions.PUT;
@@ -138,10 +152,19 @@
                 });
 
                 scope.editProfile = function () {
-                    user.set(scope.editUser)
-                        .then(function (response) {
-                            $rootScope.user = response.data;
-                        });
+                    if (!form.$pristine) {
+                        user.set(scope.editUser)
+                            .then(function (response) {
+                                $rootScope.user = response.data;
+
+                                $rootScope.app.page.messages = [{
+                                    msg: 'You have successfully updated your profile.',
+                                    type: 'success'
+                                }];
+
+                                form.$setPristine();
+                            });
+                    }
                 };
             }
         };
@@ -153,6 +176,8 @@
             scope: true,
             templateUrl: 'templates/registration/register_form.html',
             link: function (scope, element, attrs) {
+                var form = scope['register'];
+
                 var MODULE_SETTINGS = angular.extend({}, REGISTRATION, PROJECT_SETTINGS.REGISTRATION);
 
                 scope.user = {};
@@ -165,35 +190,37 @@
                 });
 
                 scope.register = function () {
-                    angular.forEach(scope.fields, function(value, key){
-                        value.errors = '';
-                    });
-
-                    $http({
-                        method: 'POST',
-                        url: PROJECT_SETTINGS.API_ROOT + MODULE_SETTINGS.REGISTER_ENDPOINT,
-                        data: scope.user
-                    }).then(function (response) {
-                        if(response.status === 201) {
-                            // When setting $location.path() the string cannot
-                            // start with a '#'
-                            var loginPath = $filter('reverseUrl')('LoginCtrl');
-                            if(loginPath.substring(0, 1) === '#') {
-                                loginPath = loginPath.substring(1);
-                            }
-
-                            $rootScope.nextRouteMessages = [{
-                                msg: response.data.data,
-                                type: 'success'
-                            }];
-
-                            $location.path(loginPath);
-                        }
-                    }, function (response, status) {
-                        angular.forEach(response.data, function (error, field) {
-                            scope.fields[field].errors = error[0];
+                    if (!form.$pristine) {
+                        angular.forEach(scope.fields, function(value, key){
+                            value.errors = '';
                         });
-                    });
+
+                        $http({
+                            method: 'POST',
+                            url: PROJECT_SETTINGS.API_ROOT + MODULE_SETTINGS.REGISTER_ENDPOINT,
+                            data: scope.user
+                        }).then(function (response) {
+                            if(response.status === 201) {
+                                // When setting $location.path() the string cannot
+                                // start with a '#'
+                                var loginPath = $filter('reverseUrl')('LoginCtrl');
+                                if(loginPath.substring(0, 1) === '#') {
+                                    loginPath = loginPath.substring(1);
+                                }
+
+                                $rootScope.nextRouteMessages = [{
+                                    msg: response.data.data,
+                                    type: 'success'
+                                }];
+
+                                $location.path(loginPath);
+                            }
+                        }, function (response, status) {
+                            angular.forEach(response.data, function (error, field) {
+                                scope.fields[field].errors = error[0];
+                            });
+                        });
+                    }
                 };
             }
         };

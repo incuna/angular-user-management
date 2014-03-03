@@ -2,7 +2,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
   'use strict';
 
   $templateCache.put('templates/registration/base/password_change.html',
-    "<div data-extend-template=templates/unauthenticated_base.html><div data-block=page-inner><h1 data-block=page-body-title>{{ app.page.title }}</h1><form password-change-form=\"\" ng-submit=changePassword()></form></div></div>"
+    "<div data-extend-template=templates/unauthenticated_base.html><div data-block=page-inner><h1 data-block=page-body-title>{{ app.page.title }}</h1><form password-change-form=\"\" name=password-change ng-submit=changePassword()></form></div></div>"
   );
 
 
@@ -12,7 +12,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/password_reset_request.html',
-    "<div data-extend-template=templates/unauthenticated_base.html><div data-block=page-inner><h1 data-block=page-body-title>{{ app.page.title }}</h1><form password-reset-request-form=\"\" ng-submit=resetPassword()></form></div></div>"
+    "<div data-extend-template=templates/unauthenticated_base.html><div data-block=page-inner><h1 data-block=page-body-title>{{ app.page.title }}</h1><form password-reset-request-form=\"\" name=password-reset-request ng-submit=resetPassword()></form></div></div>"
   );
 
 
@@ -22,7 +22,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/profile.html',
-    "<div data-extend-template=templates/base.html><div data-block=page-breadcrumbs></div><div data-block=page-head-inner>{{ app.page.title }}</div><div data-block=page-body-head></div><div data-block=page-body-content-inner><form profile-form=\"\" ng-submit=editProfile()></form><form password-change-form=\"\" change-method=update ng-submit=changePassword()></form></div></div>"
+    "<div data-extend-template=templates/base.html><div data-block=page-breadcrumbs></div><div data-block=page-head-inner>{{ app.page.title }}</div><div data-block=page-body-head></div><div data-block=page-body-content-inner><form profile-form=\"\" name=profile ng-submit=editProfile()></form><form password-change-form=\"\" name=password-change change-method=update ng-submit=changePassword()></form></div></div>"
   );
 
 

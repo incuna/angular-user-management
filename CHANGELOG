@@ -1,3 +1,8 @@
+# 0.2.0
+
+* Forms will no longer submit if they are pristine.
+* All form directives now require a `name` attribute.
+
 # 0.1.0
 
 * Added option to `passwordChangeForm` directive to update rather than change
