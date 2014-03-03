@@ -27,7 +27,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/profile_form.html',
-    "<div form-field=fields.name><input type=text ng-model=editUser.name maxlength=\"{{ fields.name.max_length }}\" placeholder=\"{{ fields.name.label }}\"></div><div class=form-actions><button type=submit>Update</button></div>"
+    "<div form-field=fields.name><input type=text ng-model=editUser.name maxlength=\"{{ fields.name.max_length }}\" placeholder=\"{{ fields.name.label }}\"></div><div class=form-actions><button type=submit>Update profile</button></div>"
   );
 
 
