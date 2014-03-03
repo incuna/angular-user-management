@@ -1,13 +1,5 @@
 <div form-field="fields.name">
-    <input type="text" ng-model="editUser.name" maxlength="{{ fields.name.max_length }}" placeholder="Name">
-</div>
-
-<div form-field="fields.location">
-    <input type="text" ng-model="editUser.location" maxlength="{{ fields.location.max_length }}" placeholder="Location">
-</div>
-
-<div form-field="fields.telephone">
-    <input type="tel" ng-model="editUser.telephone" maxlength="{{ fields.telephone.max_length }}" placeholder="Telephone">
+    <input type="text" ng-model="editUser.name" maxlength="{{ fields.name.max_length }}" placeholder="{{ fields.name.label }}">
 </div>
 
 <div class="form-actions">
