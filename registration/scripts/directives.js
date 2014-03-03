@@ -52,6 +52,9 @@
                 var MODULE_SETTINGS = angular.extend({}, REGISTRATION, PROJECT_SETTINGS.REGISTRATION);
                 var TOKEN = $route.current.pathParams.token;
                 var URL = PROJECT_SETTINGS.API_ROOT + MODULE_SETTINGS.PASSWORD_CHANGE_ENDPOINT + TOKEN + '/';
+                if (attrs.changeMethod === 'update') {
+                    URL = PROJECT_SETTINGS.API_ROOT + MODULE_SETTINGS.PASSWORD_UPDATE_ENDPOINT;
+                }
 
                 scope.data = {};
 
@@ -62,16 +65,18 @@
                     scope.fields = response.data.actions.PUT;
                 }, function (response) {
                     if (response.status === 500) {
-                        var resetPath = $filter('reverseUrl')('PasswordResetRequestCtrl');
-                        if (resetPath.substring(0, 1) === '#') {
-                            resetPath = resetPath.substring(1);
+                        if (attrs.changeMethod !== 'update') {
+                            var resetPath = $filter('reverseUrl')('PasswordResetRequestCtrl');
+                            if (resetPath.substring(0, 1) === '#') {
+                                resetPath = resetPath.substring(1);
+                            }
+
+                            $rootScope.nextRouteMessages = [{
+                                msg: 'There was a problem with your verification token. Please try again.'
+                            }];
+
+                            $location.path(resetPath);
                         }
-
-                        $rootScope.nextRouteMessages = [{
-                            msg: 'There was a problem with your verification token. Please try again.'
-                        }];
-
-                        $location.path(resetPath);
                     }
                 });
 
@@ -87,19 +92,26 @@
                     }).then(function (response) {
                         scope.data = {};
 
-                        // When setting $location.path() the string cannot
-                        // start with a '#'
-                        var loginPath = $filter('reverseUrl')('LoginCtrl');
-                        if (loginPath.substring(0, 1) === '#') {
-                            loginPath = loginPath.substring(1);
+                        if (attrs.changeMethod === 'update') {
+                            $rootScope.app.page.messages = [{
+                                msg: 'You have successfully changed your password.',
+                                type: 'success'
+                            }];
+                        } else {
+                            // When setting $location.path() the string cannot
+                            // start with a '#'
+                            var loginPath = $filter('reverseUrl')('LoginCtrl');
+                            if (loginPath.substring(0, 1) === '#') {
+                                loginPath = loginPath.substring(1);
+                            }
+
+                            $rootScope.nextRouteMessages = [{
+                                msg: 'You have successfully reset your password. You may now log in below.',
+                                type: 'success'
+                            }];
+
+                            $location.path(loginPath);
                         }
-
-                        $rootScope.nextRouteMessages = [{
-                            msg: 'You have successfully reset your password. You may now log in below.',
-                            type: 'success'
-                        }];
-
-                        $location.path(loginPath);
                     }, function (response) {
                         angular.forEach(response.data, function (error, field) {
                             scope.fields[field].errors = error[0];

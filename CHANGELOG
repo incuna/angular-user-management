@@ -1,3 +1,10 @@
+# 0.1.0
+
+* Added option to `passwordChangeForm` directive to update rather than change
+  the password.
+* Added default placeholders, based on the label data, to all fields.
+* Removed custom fields from registration and profile forms.
+
 # 0.0.4
 
 * Removed 'removeRedundantAttributes' options in htmlmin.
