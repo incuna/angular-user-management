@@ -22,7 +22,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/profile.html',
-    "<div data-extend-template=templates/base.html><div data-block=page-breadcrumbs></div><div data-block=page-head-inner>{{ app.page.title }}</div><div data-block=page-body-head></div><div data-block=page-body-content-inner><form profile-form=\"\" ng-submit=editProfile()></form></div></div>"
+    "<div data-extend-template=templates/base.html><div data-block=page-breadcrumbs></div><div data-block=page-head-inner>{{ app.page.title }}</div><div data-block=page-body-head></div><div data-block=page-body-content-inner><form profile-form=\"\" ng-submit=editProfile()></form><form password-change-form=\"\" change-method=update ng-submit=changePassword()></form></div></div>"
   );
 
 
