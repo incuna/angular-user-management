@@ -153,6 +153,10 @@
 
                 scope.editProfile = function () {
                     if (!form.$pristine) {
+                        angular.forEach(scope.fields, function(value, key){
+                            value.errors = '';
+                        });
+
                         user.set(scope.editUser)
                             .then(function (response) {
                                 $rootScope.user = response.data;
@@ -163,6 +167,10 @@
                                 }];
 
                                 form.$setPristine();
+                            }, function (response) {
+                                angular.forEach(response.data, function (error, field) {
+                                    scope.fields[field].errors = error[0];
+                                });
                             });
                     }
                 };

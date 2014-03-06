@@ -45,6 +45,8 @@
                     data: data
                 }).then(function (response) {
                     deferred.resolve(response);
+                }, function (response) {
+                    deferred.reject(response);
                 });
 
                 return deferred.promise;
