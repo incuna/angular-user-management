@@ -208,7 +208,7 @@
             scope: true,
             templateUrl: 'templates/registration/register_form.html',
             link: function (scope, element, attrs) {
-                var form = scope['register'];
+                var form = scope.register;
 
                 var MODULE_SETTINGS = angular.extend({}, REGISTRATION, PROJECT_SETTINGS.REGISTRATION);
 
