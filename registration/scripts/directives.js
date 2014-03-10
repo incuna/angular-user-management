@@ -40,7 +40,7 @@
                             form.$setPristine();
 
                             if (angular.isDefined(deferred)) {
-                                deferred.resolve(response);
+                                deferred.notify('resolve', response);
                             }
                         }, function (response) {
                             angular.forEach(response.data, function (error, field) {
@@ -48,7 +48,7 @@
                             });
 
                             if (angular.isDefined(deferred)) {
-                                deferred.reject(response);
+                                deferred.notify('reject', response);
                             }
                         });
                     }
@@ -133,7 +133,7 @@
                             form.$setPristine();
 
                             if (angular.isDefined(deferred)) {
-                                deferred.resolve(response);
+                                deferred.notify('resolve', response);
                             }
                         }, function (response) {
                             angular.forEach(response.data, function (error, field) {
@@ -141,7 +141,7 @@
                             });
 
                             if (angular.isDefined(deferred)) {
-                                deferred.reject(response);
+                                deferred.notify('reject', response);
                             }
                         });
                     }
@@ -185,7 +185,7 @@
                                 form.$setPristine();
 
                                 if (angular.isDefined(deferred)) {
-                                    deferred.resolve(response);
+                                    deferred.notify('resolve', response);
                                 }
                             }, function (response) {
                                 angular.forEach(response.data, function (error, field) {
@@ -193,7 +193,7 @@
                                 });
 
                                 if (angular.isDefined(deferred)) {
-                                    deferred.reject(response);
+                                    deferred.notify('reject', response);
                                 }
                             });
                     }
@@ -249,7 +249,7 @@
                             }
 
                             if (angular.isDefined(deferred)) {
-                                deferred.resolve(response);
+                                deferred.notify('resolve', response);
                             }
                         }, function (response) {
                             angular.forEach(response.data, function (error, field) {
@@ -257,7 +257,7 @@
                             });
 
                             if (angular.isDefined(deferred)) {
-                                deferred.reject(response);
+                                deferred.notify('reject', response);
                             }
                         });
                     }
