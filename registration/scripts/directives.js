@@ -18,7 +18,7 @@
                 };
                 scope.data = {};
 
-                scope.resetPassword = function () {
+                scope.resetPassword = function (deferred) {
                     if (!form.$pristine) {
                         angular.forEach(scope.fields, function(value, key){
                             value.errors = '';
@@ -38,10 +38,18 @@
                             }];
 
                             form.$setPristine();
+
+                            if (angular.isDefined(deferred)) {
+                                deferred.resolve(response);
+                            }
                         }, function (response) {
                             angular.forEach(response.data, function (error, field) {
                                 scope.fields[field].errors = error[0];
                             });
+
+                            if (angular.isDefined(deferred)) {
+                                deferred.reject(response);
+                            }
                         });
                     }
                 };
@@ -88,7 +96,7 @@
                     }
                 });
 
-                scope.changePassword = function () {
+                scope.changePassword = function (deferred) {
                     if (!form.$pristine) {
                         angular.forEach(scope.fields, function(value, key){
                             value.errors = '';
@@ -123,10 +131,18 @@
                             }
 
                             form.$setPristine();
+
+                            if (angular.isDefined(deferred)) {
+                                deferred.resolve(response);
+                            }
                         }, function (response) {
                             angular.forEach(response.data, function (error, field) {
                                 scope.fields[field].errors = error[0];
                             });
+
+                            if (angular.isDefined(deferred)) {
+                                deferred.reject(response);
+                            }
                         });
                     }
                 };
@@ -151,7 +167,7 @@
                     scope.editUser = angular.copy($rootScope.user);
                 });
 
-                scope.editProfile = function () {
+                scope.editProfile = function (deferred) {
                     if (!form.$pristine) {
                         angular.forEach(scope.fields, function(value, key){
                             value.errors = '';
@@ -167,10 +183,18 @@
                                 }];
 
                                 form.$setPristine();
+
+                                if (angular.isDefined(deferred)) {
+                                    deferred.resolve(response);
+                                }
                             }, function (response) {
                                 angular.forEach(response.data, function (error, field) {
                                     scope.fields[field].errors = error[0];
                                 });
+
+                                if (angular.isDefined(deferred)) {
+                                    deferred.reject(response);
+                                }
                             });
                     }
                 };
@@ -197,7 +221,7 @@
                     scope.fields = response.data.actions.POST;
                 });
 
-                scope.register = function () {
+                scope.register = function (deferred) {
                     if (!form.$pristine) {
                         angular.forEach(scope.fields, function(value, key){
                             value.errors = '';
@@ -223,10 +247,18 @@
 
                                 $location.path(loginPath);
                             }
-                        }, function (response, status) {
+
+                            if (angular.isDefined(deferred)) {
+                                deferred.resolve(response);
+                            }
+                        }, function (response) {
                             angular.forEach(response.data, function (error, field) {
                                 scope.fields[field].errors = error[0];
                             });
+
+                            if (angular.isDefined(deferred)) {
+                                deferred.reject(response);
+                            }
                         });
                     }
                 };
