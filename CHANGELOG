@@ -1,3 +1,7 @@
+# 0.4.1
+
+* Update `/register/verify/` route controller to new name.
+
 # 0.4.0
 
 * Allow for an optional deffered object to be passed in to directive methods.

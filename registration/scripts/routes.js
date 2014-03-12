@@ -13,7 +13,7 @@
             })
             .when('/register/verify/:token*\/', {
                 templateUrl: 'templates/registration/verify.html',
-                controller: 'VerifyCtrl',
+                controller: 'RegisterVerifyCtrl',
                 anonymous: true
             })
             .when('/password-reset/', {
