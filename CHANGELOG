@@ -1,3 +1,7 @@
+# 0.4.2
+
+* Register verify was using `reverseurl` rather then `reverseUrl`.
+
 # 0.4.1
 
 * Update `/register/verify/` route controller to new name.
