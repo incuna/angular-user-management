@@ -31,6 +31,11 @@ angular.module('angular-registration').run(['$templateCache', function($template
   );
 
 
+  $templateCache.put('templates/registration/base/register.html',
+    "<div data-extend-template=templates/base.html><div data-block=page-breadcrumbs></div><div data-block=page-head-inner>{{ app.page.title }}</div><div data-block=page-body-head></div><div data-block=page-body-content-inner><form register-form=\"\" name=register ng-submit=register()></form></div></div>"
+  );
+
+
   $templateCache.put('templates/registration/base/register_form.html',
     "<div form-field=fields.email><input type=email ng-model=user.email maxlength=\"{{ fields.email.max_length }}\" placeholder=\"{{ fields.email.label }}\"></div><div form-field=fields.password><input type=password ng-model=user.password placeholder=\"{{ fields.password.label }}\"></div><div form-field=fields.password2><input type=password ng-model=user.password2 placeholder=\"{{ fields.password2.label }}\"></div><div form-field=fields.name><input type=text ng-model=user.name maxlength=\"{{ fields.name.max_length }}\" placeholder=\"{{ fields.name.label }}\"></div><div class=form-actions><button type=submit>Register</button></div>"
   );
@@ -68,6 +73,11 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
   $templateCache.put('templates/registration/profile_form.html',
     "<div data-extend-template=templates/registration/base/profile_form.html></div>"
+  );
+
+
+  $templateCache.put('templates/registration/register.html',
+    "<div data-extend-template=templates/registration/base/register.html></div>"
   );
 
 
