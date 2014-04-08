@@ -158,13 +158,15 @@
             link: function (scope, element, attrs) {
                 var form = scope['profile'];
 
+                scope.editUser = {};
+
                 user.options()
                     .then(function (response) {
                         scope.fields = response.data.actions.PUT;
                     });
 
                 $rootScope.$watch('user', function () {
-                    scope.editUser = angular.copy($rootScope.user);
+                    scope.editUser = angular.extend(scope.editUser, $rootScope.user);
                 });
 
                 scope.editProfile = function (deferred) {
