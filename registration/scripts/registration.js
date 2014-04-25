@@ -4,7 +4,8 @@
     var registration = angular.module('angular-registration', [
         'project_settings',
         'ngRoute',
-        'angular-reverse-url'
+        'angular-reverse-url',
+        'gettext'
     ]);
 
     // Default settings. You can override these in your settings module.

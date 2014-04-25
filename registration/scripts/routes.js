@@ -3,13 +3,13 @@
 
     var registration = angular.module('angular-registration');
 
-    registration.config(['$routeProvider', function ($routeProvider) {
+    registration.config(['$routeProvider', 'gettext', function ($routeProvider, gettext) {
         $routeProvider
             .when('/register/', {
                 templateUrl: 'templates/registration/register.html',
                 controller: 'RegisterCtrl',
                 anonymous: true,
-                title: 'Register'
+                title: gettext('Register')
             })
             .when('/register/verify/:token*\/', {
                 templateUrl: 'templates/registration/verify.html',
@@ -26,12 +26,12 @@
                 templateUrl: 'templates/registration/password_change.html',
                 controller: 'PasswordChangeCtrl',
                 anonymous: true,
-                title: 'Set a new password'
+                title: gettext('Set a new password')
             })
             .when('/profile/', {
                 templateUrl: 'templates/registration/profile.html',
                 controller: 'ProfileCtrl',
-                title: 'My profile'
+                title: gettext('My profile')
             });
     }]);
 }());
