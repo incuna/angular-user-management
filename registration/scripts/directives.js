@@ -3,7 +3,7 @@
 
     var registration = angular.module('angular-registration');
 
-    registration.directive('passwordResetRequestForm', ['$rootScope', '$http', '$location', 'REGISTRATION', 'PROJECT_SETTINGS', function ($rootScope, $http, $location, REGISTRATION, PROJECT_SETTINGS) {
+    registration.directive('passwordResetRequestForm', ['$rootScope', '$http', '$location', 'REGISTRATION', 'PROJECT_SETTINGS', 'gettext', function ($rootScope, $http, $location, REGISTRATION, PROJECT_SETTINGS, gettext) {
         return {
             restrict: 'A',
             scope: true,
@@ -33,7 +33,7 @@
                             scope.data = {};
                             // TODO: this should come from the API.
                             $rootScope.app.page.messages = [{
-                                msg: 'We\'ve sent an email to ' + email + ' that contains a link to reset your password.',
+                                msg: gettext('We\'ve sent an email to ' + email + ' that contains a link to reset your password.'),
                                 type: 'success'
                             }];
 
@@ -57,7 +57,7 @@
         };
     }]);
 
-    registration.directive('passwordChangeForm', ['$rootScope', '$http', '$route', '$location', '$filter', 'REGISTRATION', 'PROJECT_SETTINGS', function ($rootScope, $http, $route, $location, $filter, REGISTRATION, PROJECT_SETTINGS) {
+    registration.directive('passwordChangeForm', ['$rootScope', '$http', '$route', '$location', '$filter', 'REGISTRATION', 'PROJECT_SETTINGS', 'gettext', function ($rootScope, $http, $route, $location, $filter, REGISTRATION, PROJECT_SETTINGS, gettext) {
         return {
             restrict: 'A',
             scope: true,
@@ -88,7 +88,7 @@
                             }
 
                             $rootScope.nextRouteMessages = [{
-                                msg: 'There was a problem with your verification token. Please try again.'
+                                msg: gettext('There was a problem with your verification token. Please try again.')
                             }];
 
                             $location.path(resetPath);
@@ -111,7 +111,7 @@
 
                             if (attrs.changeMethod === 'update') {
                                 $rootScope.app.page.messages = [{
-                                    msg: 'You have successfully changed your password.',
+                                    msg: gettext('You have successfully changed your password.'),
                                     type: 'success'
                                 }];
                             } else {
@@ -123,7 +123,7 @@
                                 }
 
                                 $rootScope.nextRouteMessages = [{
-                                    msg: 'You have successfully reset your password. You may now log in below.',
+                                    msg: gettext('You have successfully reset your password. You may now log in below.'),
                                     type: 'success'
                                 }];
 
@@ -150,7 +150,7 @@
         };
     }]);
 
-    registration.directive('profileForm', ['$rootScope', '$http', 'user', function ($rootScope, $http, user) {
+    registration.directive('profileForm', ['$rootScope', '$http', 'user', 'gettext', function ($rootScope, $http, user, gettext) {
         return {
             restrict: 'A',
             scope: true,
@@ -180,7 +180,7 @@
                                 $rootScope.user = response.data;
 
                                 $rootScope.app.page.messages = [{
-                                    msg: 'You have successfully updated your profile.',
+                                    msg: gettext('You have successfully updated your profile.'),
                                     type: 'success'
                                 }];
 
