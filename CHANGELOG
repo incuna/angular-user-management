@@ -1,3 +1,8 @@
+# 0.5.0
+
+* Strings within the package are now translatable using [angular-gettext](http://angular-gettext.rocketeer.be/).
+* Added missing register template.
+
 # 0.4.3
 
 * Extend `scope.editUser` rather than overriding with
