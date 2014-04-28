@@ -3,10 +3,10 @@
         <h1 translate>Verify email</h1>
 
         <div>
-            <div ng-show="status === 200">
+            <div ng-show="status === 201">
                 <p translate>Thank you for verifying your account. You may now <a href="{{ 'LoginCtrl'|reverseUrl }}">log in</a>.</p>
             </div>
-            <div ng-hide="status === 200">
+            <div ng-hide="status === 201">
                 <p translate>There was a problem verifying your account, you may have already verified it. Please try <a href="{{ 'LoginCtrl'|reverseUrl }}">logging in</a>.</p>
             </div>
         </div>
