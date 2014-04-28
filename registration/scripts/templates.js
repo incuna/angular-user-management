@@ -7,7 +7,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/password_change_form.html',
-    "<div form-field=fields.old_password ng-if=fields.old_password><input type=password ng-model=data.old_password placeholder=\"{{ fields.old_password.label }}\"></div><div form-field=fields.new_password><input type=password ng-model=data.new_password placeholder=\"{{ fields.new_password.label }}\"></div><div form-field=fields.new_password2><input type=password ng-model=data.new_password2 placeholder=\"{{ fields.new_password2.label }}\"></div><div class=form-actions><button type=submit>Update password</button></div>"
+    "<div form-field=fields.old_password ng-if=fields.old_password><input type=password ng-model=data.old_password placeholder=\"{{ fields.old_password.label }}\"></div><div form-field=fields.new_password><input type=password ng-model=data.new_password placeholder=\"{{ fields.new_password.label }}\"></div><div form-field=fields.new_password2><input type=password ng-model=data.new_password2 placeholder=\"{{ fields.new_password2.label }}\"></div><div class=form-actions><button type=submit translate=\"\">Update password</button></div>"
   );
 
 
@@ -17,7 +17,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/password_reset_request_form.html',
-    "<div form-field=fields.email><input ng-model=data.email type=text placeholder=\"{{ fields.email.label }}\" autofocus></div><div class=form-actions><button type=submit>Reset password</button></div>"
+    "<div form-field=fields.email><input ng-model=data.email type=text placeholder=\"{{ fields.email.label }}\" autofocus></div><div class=form-actions><button type=submit translate=\"\">Reset password</button></div>"
   );
 
 
@@ -27,7 +27,7 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/profile_form.html',
-    "<div form-field=fields.name><input type=text ng-model=editUser.name maxlength=\"{{ fields.name.max_length }}\" placeholder=\"{{ fields.name.label }}\"></div><div class=form-actions><button type=submit>Update profile</button></div>"
+    "<div form-field=fields.name><input type=text ng-model=editUser.name maxlength=\"{{ fields.name.max_length }}\" placeholder=\"{{ fields.name.label }}\"></div><div class=form-actions><button type=submit translate=\"\">Update profile</button></div>"
   );
 
 
@@ -37,12 +37,12 @@ angular.module('angular-registration').run(['$templateCache', function($template
 
 
   $templateCache.put('templates/registration/base/register_form.html',
-    "<div form-field=fields.email><input type=email ng-model=user.email maxlength=\"{{ fields.email.max_length }}\" placeholder=\"{{ fields.email.label }}\"></div><div form-field=fields.password><input type=password ng-model=user.password placeholder=\"{{ fields.password.label }}\"></div><div form-field=fields.password2><input type=password ng-model=user.password2 placeholder=\"{{ fields.password2.label }}\"></div><div form-field=fields.name><input type=text ng-model=user.name maxlength=\"{{ fields.name.max_length }}\" placeholder=\"{{ fields.name.label }}\"></div><div class=form-actions><button type=submit>Register</button></div>"
+    "<div form-field=fields.email><input type=email ng-model=user.email maxlength=\"{{ fields.email.max_length }}\" placeholder=\"{{ fields.email.label }}\"></div><div form-field=fields.password><input type=password ng-model=user.password placeholder=\"{{ fields.password.label }}\"></div><div form-field=fields.password2><input type=password ng-model=user.password2 placeholder=\"{{ fields.password2.label }}\"></div><div form-field=fields.name><input type=text ng-model=user.name maxlength=\"{{ fields.name.max_length }}\" placeholder=\"{{ fields.name.label }}\"></div><div class=form-actions><button type=submit translate=\"\">Register</button></div>"
   );
 
 
   $templateCache.put('templates/registration/base/verify.html',
-    "<div data-extend-template=templates/unauthenticated_base.html><div data-block=page-inner><h1>Verify email</h1><div><div ng-show=\"status === 200\"><p>Thank you for verifying your account. You may now <a href=\"{{ 'LoginCtrl'|reverseUrl }}\">log in</a>.</p></div><div ng-hide=\"status === 200\"><p>There was a problem verifying your account, you may have already verified it. Please try <a href=\"{{ 'LoginCtrl'|reverseUrl }}\">logging in</a>.</p></div></div></div></div>"
+    "<div data-extend-template=templates/unauthenticated_base.html><div data-block=page-inner><h1 translate=\"\">Verify email</h1><div><div ng-show=\"status === 201\"><p translate=\"\">Thank you for verifying your account. You may now <a href=\"{{ 'LoginCtrl'|reverseUrl }}\">log in</a>.</p></div><div ng-hide=\"status === 201\"><p translate=\"\">There was a problem verifying your account, you may have already verified it. Please try <a href=\"{{ 'LoginCtrl'|reverseUrl }}\">logging in</a>.</p></div></div></div></div>"
   );
 
 
