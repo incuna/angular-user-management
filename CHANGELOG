@@ -1,6 +1,10 @@
+# 0.5.2
+
+* Default all routes to being anonymous, except `/profile/`.
+
 # 0.5.1
 
-* Update verify template to expect 201 status rather than 200. 
+* Update verify template to expect 201 status rather than 200.
 
 # 0.5.0
 
