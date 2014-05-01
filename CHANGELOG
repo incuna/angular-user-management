@@ -1,3 +1,8 @@
+# 0.5.4
+
+* `gettextCatalog` cannot be injected in to the config method. Define titles
+  for routes in the controllers.
+
 # 0.5.3
 
 * Use `gettextCatalog.getString` rather than `gettext` as the latter will
