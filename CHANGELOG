@@ -1,3 +1,8 @@
+# 0.5.3
+
+* Use `gettextCatalog.getString` rather than `gettext` as the latter will
+  only mark the string as translatable but not replace it.
+
 # 0.5.2
 
 * Default all routes to being anonymous, except `/profile/`.
