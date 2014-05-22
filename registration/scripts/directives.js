@@ -13,10 +13,14 @@
 
                 var MODULE_SETTINGS = angular.extend({}, REGISTRATION, PROJECT_SETTINGS.REGISTRATION);
 
-                scope.fields = {
-                    email: {}
-                };
                 scope.data = {};
+
+                $http({
+                    method: 'OPTIONS',
+                    url: PROJECT_SETTINGS.API_ROOT + MODULE_SETTINGS.PASSWORD_RESET_REQUEST_ENDPOINT
+                }).then(function (response) {
+                    scope.fields = response.data.actions.POST;
+                });
 
                 scope.resetPassword = function (deferred) {
                     if (!form.$pristine) {
