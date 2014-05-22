@@ -1,3 +1,8 @@
+# 0.5.5
+
+* Password reset request fields are now loaded from the API.
+* Bumped `angular-reverse-url` requirement.
+
 # 0.5.4
 
 * `gettextCatalog` cannot be injected in to the config method. Define titles
