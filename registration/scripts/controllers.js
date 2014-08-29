@@ -7,14 +7,6 @@
         $scope.app.page.title = gettextCatalog.getString('Register');
     }]);
 
-    registration.controller('PasswordResetRequestCtrl', ['$scope', 'gettextCatalog', function ($scope, gettextCatalog) {
-        $scope.app.page.title = gettextCatalog.getString('Reset your password');
-    }]);
-
-    registration.controller('PasswordChangeCtrl', ['$scope', 'gettextCatalog', function ($scope, gettextCatalog) {
-        $scope.app.page.title = gettextCatalog.getString('Set a new password');
-    }]);
-
     registration.controller('ProfileCtrl', ['$scope', 'gettextCatalog', function ($scope, gettextCatalog) {
         $scope.app.page.title = gettextCatalog.getString('My profile');
     }]);

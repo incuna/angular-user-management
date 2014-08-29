@@ -13,14 +13,6 @@
                 templateUrl: 'templates/registration/verify.html',
                 controller: 'RegisterVerifyCtrl'
             })
-            .when('/password-reset/', {
-                templateUrl: 'templates/registration/password_reset_request.html',
-                controller: 'PasswordResetRequestCtrl'
-            })
-            .when('/password-change/:token*\/', {
-                templateUrl: 'templates/registration/password_change.html',
-                controller: 'PasswordChangeCtrl'
-            })
             .when('/profile/', {
                 templateUrl: 'templates/registration/profile.html',
                 controller: 'ProfileCtrl',
