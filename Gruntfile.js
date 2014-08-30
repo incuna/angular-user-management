@@ -1,8 +1,26 @@
 'use strict';
 
+var fs = require('fs');
+var _ = require('lodash');
+
 module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-contrib-watch');
+
+    // Get a list of modules
+    var modules = fs.readdirSync('src');
+    var templatesConfig = {};
+    _.each(modules, function (module) {
+        var modulePath = 'src/' + module;
+        templatesConfig[module] = {
+            cwd: modulePath,
+            src: 'templates/user_management/**/*.html',
+            dest: modulePath + '/scripts/templates.js',
+            options: {
+                module: 'user_management.' + module
+            }
+        };
+    });
 
     grunt.initConfig({
         config: {
@@ -19,23 +37,15 @@ module.exports = function (grunt) {
         },
         watch: {
             templates: {
-                files: 'registration/templates/**/*.html',
-                tasks: 'ngtemplates:app'
+                files: 'src/**/templates/**/*.html',
+                tasks: 'ngtemplates'
             }
         },
-        ngtemplates: {
+        ngtemplates: _.extend({
             options: {
                 htmlmin: '<%= config.htmlmin %>',
-            },
-            app: {
-                cwd: 'registration',
-                src: 'templates/**/*.html',
-                dest: 'registration/scripts/templates.js',
-                options: {
-                    module: 'angular-registration'
-                }
             }
-        }
+        }, templatesConfig)
     });
 
 };
