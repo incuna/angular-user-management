@@ -9,10 +9,6 @@
                 templateUrl: 'templates/registration/register.html',
                 controller: 'RegisterCtrl'
             })
-            .when('/register/verify/:token*\/', {
-                templateUrl: 'templates/registration/verify.html',
-                controller: 'RegisterVerifyCtrl'
-            })
             .when('/profile/', {
                 templateUrl: 'templates/registration/profile.html',
                 controller: 'ProfileCtrl',
