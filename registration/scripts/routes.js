@@ -5,10 +5,6 @@
 
     registration.config(['$routeProvider', function ($routeProvider) {
         $routeProvider
-            .when('/register/', {
-                templateUrl: 'templates/registration/register.html',
-                controller: 'RegisterCtrl'
-            })
             .when('/profile/', {
                 templateUrl: 'templates/registration/profile.html',
                 controller: 'ProfileCtrl',
