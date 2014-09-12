@@ -6,16 +6,31 @@ var _ = require('lodash');
 module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-angular-templates');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-concat');
 
     // Get a list of modules
-    var modules = fs.readdirSync('src');
-    var templatesConfig = {};
+    var modules = fs.readdirSync('src').filter(function (file) {
+        return fs.statSync('src/' + file).isDirectory();
+    });
+    var ngtemplatesConfig = {};
+    var concatConfig = {};
     _.each(modules, function (module) {
         var modulePath = 'src/' + module;
-        templatesConfig[module] = {
+        concatConfig[module] = {
+            src: [
+                modulePath + '/scripts/init.js',
+                modulePath + '/scripts/routes.js',
+                modulePath + '/scripts/services.js',
+                modulePath + '/scripts/controllers.js',
+                modulePath + '/scripts/directives.js'
+            ],
+            dest: 'dist/' + module + '/' + module + '.js'
+        };
+
+        ngtemplatesConfig[module] = {
             cwd: modulePath,
             src: 'templates/user_management/**/*.html',
-            dest: modulePath + '/scripts/templates.js',
+            dest: 'dist/' + module + '/templates.js',
             options: {
                 module: 'user_management.' + module
             }
@@ -45,7 +60,13 @@ module.exports = function (grunt) {
             options: {
                 htmlmin: '<%= config.htmlmin %>',
             }
-        }, templatesConfig)
+        }, ngtemplatesConfig),
+        concat: _.extend({}, concatConfig)
     });
+
+    grunt.registerTask('default', [
+        'concat',
+        'ngtemplates'
+    ]);
 
 };
