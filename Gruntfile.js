@@ -5,15 +5,17 @@ var _ = require('lodash');
 
 module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-angular-templates');
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Get a list of modules
     var modules = fs.readdirSync('src').filter(function (file) {
         return fs.statSync('src/' + file).isDirectory();
     });
-    var ngtemplatesConfig = {};
     var concatConfig = {};
+    var ngtemplatesConfig = {};
+    var uglifyConfig = {};
     _.each(modules, function (module) {
         var modulePath = 'src/' + module;
         concatConfig[module] = {
@@ -34,6 +36,15 @@ module.exports = function (grunt) {
             options: {
                 module: 'user_management.' + module
             }
+        };
+
+        uglifyConfig[module] = {
+            files: [{
+                expand: true,
+                cwd: 'dist/' + module,
+                src: '**/*.js',
+                dest: 'dist/' + module
+            }]
         };
     });
 
@@ -61,7 +72,14 @@ module.exports = function (grunt) {
                 htmlmin: '<%= config.htmlmin %>',
             }
         }, ngtemplatesConfig),
-        concat: _.extend({}, concatConfig)
+        concat: _.extend({}, concatConfig),
+        uglify: _.extend({
+            options: {
+                compress: {
+                    drop_console: true
+                }
+            }
+        }, uglifyConfig)
     });
 
     grunt.registerTask('default', [
