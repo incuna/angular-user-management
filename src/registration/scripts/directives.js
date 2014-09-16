@@ -31,7 +31,7 @@
                                 });
 
                                 registrationFactory
-                                    .resetRequest.post(scope.data)
+                                    .register.post(scope.data)
                                     .then(function (response) {
                                         scope.data = {};
                                         scope.registered = true;
