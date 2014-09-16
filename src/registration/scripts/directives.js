@@ -23,6 +23,7 @@
                         optionsPromise
                             .then(function () {
                                 scope.loading = true;
+                                scope.registered = false;
 
                                 // Clear all errors on the fields object.
                                 angular.forEach(scope.fields, function(value, key){
