@@ -15,7 +15,7 @@
 
                     profileFactory.profile.get()
                         .then(function (response) {
-                            angular.extend(scope.data, user);
+                            angular.extend(scope.data, response.data);
                         });
 
                     var optionsPromise = profileFactory.profile.options();
@@ -37,7 +37,7 @@
                                 profileFactory
                                     .profile.patch(scope.data)
                                     .then(function (response) {
-                                        scope.data = response;
+                                        scope.data = response.data;
                                         scope.updated = true;
                                     }, function (response) {
                                         angular.forEach(response.data, function (error, field) {
