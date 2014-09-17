@@ -5,20 +5,12 @@
 
     module.factory('registrationFactory', [
         '$http',
-        'PROJECT_SETTINGS',
-        function ($http, PROJECT_SETTINGS) {
-            var MODULE_SETTINGS = angular.extend(
-                {},
-                {
-                    REGISTRATION_ENDPOINT: '/register'
-                },
-                PROJECT_SETTINGS.USER_MANAGEMENT.REGISTRATION
-            );
-
-            var API_ROOT = PROJECT_SETTINGS.API_ROOT;
+        'userManagementRegistrationConfig',
+        function ($http, userManagementRegistrationConfig) {
+            var apiRoot = userManagementRegistrationConfig.apiRoot();
 
             var register = {
-                url: API_ROOT + MODULE_SETTINGS.REGISTRATION_ENDPOINT,
+                url: apiRoot + userManagementRegistrationConfig.registrationEndpoint(),
                 options: function () {
                     return $http({
                         method: 'OPTIONS',
