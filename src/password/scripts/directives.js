@@ -23,6 +23,7 @@
                         optionsPromise
                             .then(function () {
                                 scope.loading = true;
+                                scope.email = null;
 
                                 // Clear all errors on the fields object.
                                 angular.forEach(scope.fields, function(value, key){
@@ -58,6 +59,8 @@
                 scope: true,
                 templateUrl: 'templates/user_management/password/change_form.html',
                 link: function (scope, element, attrs) {
+                    scope.data = {};
+
                     // If there is a URL fragment named `token` in the current route then
                     // we shall assume we are changing a forgotten password.
                     // If it does not exist, then we are updating a password.
@@ -85,6 +88,8 @@
                         optionsPromise
                             .then(function () {
                                 scope.loading = true;
+                                scope.changed = false;
+                                scope.updated = false;
 
                                 // Clear all errors on the fields object.
                                 angular.forEach(scope.fields, function(value, key){
@@ -95,12 +100,14 @@
                                 if (angular.isDefined(TOKEN)) {
                                     promise = passwordFactory.change.put(scope.data, TOKEN)
                                         .then(function () {
-                                            scope.updated = true;
+                                            scope.data = {};
+                                            scope.changed = true;
                                         });
                                 } else {
                                     promise = passwordFactory.update.put(scope.data)
                                         .then(function () {
-                                            scope.changed = true;
+                                            scope.data = {};
+                                            scope.updated = true;
                                         });
                                 }
 
@@ -111,7 +118,7 @@
                                         });
                                     })
                                     ['finally'](function () {
-                                        scope.loading = true;
+                                        scope.loading = false;
                                     });
 
                             });
