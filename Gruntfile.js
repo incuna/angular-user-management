@@ -21,6 +21,7 @@ module.exports = function (grunt) {
         concatConfig[module] = {
             src: [
                 modulePath + '/scripts/init.js',
+                modulePath + '/scripts/providers.js',
                 modulePath + '/scripts/routes.js',
                 modulePath + '/scripts/services.js',
                 modulePath + '/scripts/controllers.js',
