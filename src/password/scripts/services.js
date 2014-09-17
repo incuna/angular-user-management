@@ -5,22 +5,12 @@
 
     module.factory('passwordFactory', [
         '$http',
-        'PROJECT_SETTINGS',
-        function ($http, PROJECT_SETTINGS) {
-            var MODULE_SETTINGS = angular.extend(
-                {},
-                {
-                    RESET_REQUEST_ENDPOINT: '/auth/password_reset',
-                    CHANGE_ENDPOINT: '/auth/password_reset/confirm',
-                    UPDATE_ENDPOINT: '/profile/password'
-                },
-                PROJECT_SETTINGS.USER_MANAGEMENT.PASSWORD
-            );
-
-            var API_ROOT = PROJECT_SETTINGS.API_ROOT;
+        'userManagementPasswordConfig',
+        function ($http, userManagementPasswordConfig) {
+            var apiRoot = userManagementPasswordConfig.apiRoot();
 
             var resetRequest = {
-                url: API_ROOT + MODULE_SETTINGS.RESET_REQUEST_ENDPOINT,
+                url: apiRoot + userManagementPasswordConfig.resetRequestEndpoint(),
                 options: function () {
                     return $http({
                         method: 'OPTIONS',
@@ -37,7 +27,7 @@
             };
 
             var change = {
-                url: API_ROOT + MODULE_SETTINGS.CHANGE_ENDPOINT,
+                url: apiRoot + userManagementPasswordConfig.changeEndpoint(),
                 options: function (token) {
                     return $http({
                         method: 'OPTIONS',
@@ -54,7 +44,7 @@
             };
 
             var update = {
-                url: API_ROOT + MODULE_SETTINGS.UPDATE_ENDPOINT,
+                url: apiRoot + userManagementPasswordConfig.updateEndpoint(),
                 options: function () {
                     return $http({
                         method: 'OPTIONS',
