@@ -3,7 +3,7 @@
 
     var module = angular.module('user_management.password');
 
-    module.controller('PasswordResetCtrl', [function () {}]);
+    module.controller('PasswordResetRequestCtrl', [function () {}]);
 
     module.controller('PasswordChangeCtrl', [function () {}]);
 

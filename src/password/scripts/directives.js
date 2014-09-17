@@ -19,7 +19,7 @@
                             scope.fields = response.data.actions.POST;
                         });
 
-                    scope.resetReqest = function () {
+                    scope.resetRequest = function () {
                         optionsPromise
                             .then(function () {
                                 scope.loading = true;
