@@ -5,23 +5,15 @@
 
     module.factory('verificationFactory', [
         '$http',
-        'PROJECT_SETTINGS',
-        function ($http, PROJECT_SETTINGS) {
-            var MODULE_SETTINGS = angular.extend(
-                {},
-                {
-                    VERIFICATION_ENDPOINT: '/verify_email'
-                },
-                PROJECT_SETTINGS.USER_MANAGEMENT.VERIFICATION
-            );
-
-            var API_ROOT = PROJECT_SETTINGS.API_ROOT;
+        'userManagementVerificationConfig',
+        function ($http, userManagementVerificationConfig) {
+            var apiRoot = userManagementVerificationConfig.apiRoot();
 
             var verify =  {
                 post: function (token) {
                     return $http({
                         method: 'POST',
-                        url: API_ROOT + MODULE_SETTINGS.VERIFICATION_ENDPOINT + '/' + token,
+                        url: apiRoot + userManagementVerificationConfig.verificationEndpoint() + '/' + token,
                         data: {token: token}
                     });
                 }
