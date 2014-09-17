@@ -5,20 +5,12 @@
 
     module.factory('profileFactory', [
         '$http',
-        'PROJECT_SETTINGS',
-        function ($http, PROJECT_SETTINGS) {
-            var MODULE_SETTINGS = angular.extend(
-                {},
-                {
-                    PROFILE_ENDPOINT: '/profile'
-                },
-                PROJECT_SETTINGS.USER_MANAGEMENT.PROFILE
-            );
-
-            var API_ROOT = PROJECT_SETTINGS.API_ROOT;
+        'userManagementProfileConfig',
+        function ($http, userManagementProfileConfig) {
+            var apiRoot = userManagementProfileConfig.apiRoot();
 
             var profile = {
-                url: API_ROOT + MODULE_SETTINGS.PROFILE_ENDPOINT,
+                url: apiRoot + userManagementProfileConfig.profileEndpoint(),
                 options: function () {
                     return $http({
                         method: 'OPTIONS',
