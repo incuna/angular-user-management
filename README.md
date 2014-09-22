@@ -21,12 +21,6 @@ angular.module('app', [
 ]);
 ```
 
-* Add `project_settings` module with a `PROJECT_SETTINGS` constant.
-```javascript
-angular.module('project_settings', [])
-    .constant('PROJECT_SETTINGS', {});
-```
-
 These settings are extended with defaults defined in the services so you can provide values to override with here.
 
 It's planned to deprecate this method of configuring settings, moving towards a factory of settings.
