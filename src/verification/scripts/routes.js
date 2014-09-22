@@ -5,7 +5,7 @@
 
     module.config([
         '$routeProvider',
-        function () {
+        function ($routeProvider) {
             $routeProvider
                 .when('/register/verify/:token*\/', {
                     templateUrl: 'templates/user_management/verification/verification.html',

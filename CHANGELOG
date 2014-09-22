@@ -1,3 +1,7 @@
+# 1.0.1
+
+* Ensure `$routeProvider` is defined.
+
 # 1.0.0
 
 * Rebranded as `angular-user-management` with closer ties to
