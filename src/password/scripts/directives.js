@@ -32,6 +32,7 @@
                                 angular.forEach(scope.fields, function(value, key){
                                     value.errors = '';
                                 });
+                                scope.errors = {};
 
                                 passwordFactory
                                     .resetRequest.post(scope.data)
@@ -41,8 +42,13 @@
                                         scope.successData = response.data;
                                     }, function (response) {
                                         scope.errorData = response.data;
+
                                         angular.forEach(response.data, function (error, field) {
-                                            scope.fields[field].errors = error[0];
+                                            error = angular.isArray(error) ? error[0] : error;
+                                            if (angular.isDefined(scope.fields[field])) {
+                                                scope.fields[field].errors = error;
+                                            }
+                                            scope.errors[field] = error;
                                         });
                                     })
                                     ['finally'](function () {
@@ -103,6 +109,7 @@
                                 angular.forEach(scope.fields, function(value, key){
                                     value.errors = '';
                                 });
+                                scope.errors = {};
 
                                 var promise;
                                 if (angular.isDefined(TOKEN)) {
@@ -124,8 +131,13 @@
                                 promise
                                     ['catch'](function (response) {
                                         scope.errorData = response.data;
+
                                         angular.forEach(response.data, function (error, field) {
-                                            scope.fields[field].errors = error[0];
+                                            error = angular.isArray(error) ? error[0] : error;
+                                            if (angular.isDefined(scope.fields[field])) {
+                                                scope.fields[field].errors = error;
+                                            }
+                                            scope.errors[field] = error;
                                         });
                                     })
                                     ['finally'](function () {
