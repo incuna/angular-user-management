@@ -14,10 +14,16 @@
                 link: function (scope, element, attrs) {
                     var TOKEN = $route.current.pathParams.token;
 
+                    scope.loading = true;
                     verificationFactory
                         .verify.post(TOKEN)
                         .then(function (response) {
                             scope.status = response.status;
+                        }, function (response) {
+                            scope.status = response.status;
+                        })
+                        ['finally'](function () {
+                            scope.loading = false;
                         });
                 }
             };
