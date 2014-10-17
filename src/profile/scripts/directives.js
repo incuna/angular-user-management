@@ -30,6 +30,9 @@
                                 scope.loading = true;
                                 scope.updated = false;
 
+                                scope.successData = undefined;
+                                scope.errorData = undefined;
+
                                 // Clear all errors on the fields object.
                                 angular.forEach(scope.fields, function(value, key){
                                     value.errors = '';
@@ -40,7 +43,9 @@
                                     .then(function (response) {
                                         scope.data = response.data;
                                         scope.updated = true;
+                                        scope.successData = response.data;
                                     }, function (response) {
+                                        scope.errorData = response.data;
                                         angular.forEach(response.data, function (error, field) {
                                             scope.fields[field].errors = error[0];
                                         });
