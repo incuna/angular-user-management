@@ -1,3 +1,9 @@
+# 1.1.0
+
+* Added success and error data to scopes.
+* Moved errors to a separate object, however they have been left on the fields
+  for backwards compatibility.
+
 # 1.0.1
 
 * Ensure `$routeProvider` is defined.
