@@ -1,4 +1,4 @@
-(function (angular, moment) {
+(function (angular) {
     'use strict';
 
     var profile = angular.module('user_management.avatar');
@@ -60,5 +60,49 @@
         }
     ]);
 
-}(window.angular, window.moment));
+    profile.directive('avatar', [
+        '$rootScope',
+        '$timeout',
+        '$http',
+        'profileFactory',
+        'avatarFactory',
+        'userManagementAvatarConfig',
+        function ($rootScope, $http, $timeout, profileFactory, avatarFactory, userManagementAvatarConfig) {
+            return {
+                restrict: 'A',
+                scope: {
+                    userUrl: '@',
+                    size: '@'
+                },
+                link: function link(scope, element, attrs) {
+                    var defaults = userManagementAvatarConfig.defaultAvatarPaths();
+
+                    // wait for the URL to be populated
+                    scope.$watch('userUrl', function (value) {
+                        scope.userUrl = attrs.userUrl;
+
+                        if (angular.isDefined(scope.userUrl) && (scope.userUrl !== null) && (scope.userUrl !== '')) {
+                            getAvatar(scope.userUrl);
+                        }
+                    });
+
+
+                    function getAvatar(dataUrl) {
+                        avatarFactory.getSized(dataUrl, {
+                            width: 150,
+                            height: 150
+                        }, function (data) {
+                            if (angular.isDefined(data)) {
+                                element[0].src = data;
+                            } else {
+                                element[0].src = defaults['thumbnail'];
+                            }
+                        });
+                    }
+                }
+            };
+        }
+    ]);
+
+}(window.angular));
 
