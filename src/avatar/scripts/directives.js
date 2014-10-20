@@ -1,7 +1,7 @@
 (function (angular, moment) {
     'use strict';
 
-    var profile = angular.module('avatarprofile');
+    var profile = angular.module('user_management.avatar');
 
     profile.directive('modifyAction', [
         function () {
@@ -46,13 +46,15 @@
     ]);
 
     profile.directive('avatarprofileInit', [
-        'PROJECT_SETTINGS',
+        'userManagementAvatarConfig',
         '$rootScope',
-        function (PROJECT_SETTINGS, $rootScope) {
+        function (userManagementAvatarConfig, $rootScope) {
             return {
                 restrict: 'A',
                 link: function link(scope, element, attrs) {
-                    scope.avatarUploadUrl = PROJECT_SETTINGS.API_ROOT + '/profile/avatar/';
+                    var apiRoot = userManagementAvatarConfig.apiRoot();
+                    debugger;
+                    scope.avatarUploadUrl = apiRoot + userManagementAvatarConfig.avatarEndpoint();
                     scope.token = $rootScope.usertoken;
                 }
             };
