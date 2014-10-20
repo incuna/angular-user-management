@@ -53,7 +53,6 @@
                 restrict: 'A',
                 link: function link(scope, element, attrs) {
                     var apiRoot = userManagementAvatarConfig.apiRoot();
-                    debugger;
                     scope.avatarUploadUrl = apiRoot + userManagementAvatarConfig.avatarEndpoint();
                     scope.token = $rootScope.usertoken;
                 }
