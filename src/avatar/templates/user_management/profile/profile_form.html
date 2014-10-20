@@ -12,7 +12,8 @@
 
 <div class="form-group" ng-class="{'has-error': fields.avatar.errors}">
     <label for="avatar" ng-if="fields.avatar.label">{{ fields.avatar.label }}</label>
-    <img avatar user-url="{{ controls.publicUrl }}" size="thumbnail" width="150" height="150" />
+
+    <img avatar user-url="{{ avatarUploadUrl }}" size="thumbnail" width="150" height="150" />
 
     <input type="text" name="token" value="{{ token }}" />
 
