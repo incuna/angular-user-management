@@ -6,6 +6,9 @@
     module.provider('userManagementAvatarConfig', function () {
         var apiRoot = '';
         var avatarEndpoint = '/profile/avatar';
+        var defaultAvatarPaths = {
+            'thumbnail': '/avatars/avatar-300.png'
+        };
 
         return {
             $get: function () {
@@ -15,6 +18,9 @@
                     },
                     avatarEndpoint: function () {
                         return avatarEndpoint;
+                    },
+                    defaultAvatarPaths: function () {
+                        return defaultAvatarPaths;
                     }
                 };
             },
@@ -23,6 +29,9 @@
             },
             setAvatarEndpoint: function (value) {
                 avatarEndpoint = value;
+            },
+            setDefaultAvatarPaths: function (value) {
+                defaultAvatarPaths = value;
             }
         };
     });
