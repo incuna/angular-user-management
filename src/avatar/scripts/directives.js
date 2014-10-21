@@ -48,13 +48,31 @@
     profile.directive('avatarprofileInit', [
         'userManagementAvatarConfig',
         '$rootScope',
-        function (userManagementAvatarConfig, $rootScope) {
+        'avatarFactory',
+        function (userManagementAvatarConfig, $rootScope, avatarFactory) {
             return {
                 restrict: 'A',
                 link: function link(scope, element, attrs) {
                     var apiRoot = userManagementAvatarConfig.apiRoot();
                     scope.avatarUploadUrl = apiRoot + userManagementAvatarConfig.avatarEndpoint();
                     scope.token = $rootScope.usertoken;
+
+                    function clearAvatarSuccess(response) {
+                        scope.$broadcast('avatar:clear:success', response);
+                    }
+
+                    function clearAvatarError(error) {
+                        scope.$broadcast('avatar:clear:error', error);
+                    }
+
+                    function clearAvatar($event) {
+                        $event.stopPropagation();
+
+                        avatarFactory.clear(scope.avatarUploadUrl)
+                            .then(clearAvatarSuccess, clearAvatarError);
+                    }
+
+                    scope.clearAvatar = clearAvatar;
                 }
             };
         }
@@ -77,12 +95,22 @@
                 link: function link(scope, element, attrs) {
                     var apiRoot = userManagementAvatarConfig.apiRoot();
                     var defaults = apiRoot + userManagementAvatarConfig.defaultAvatarPaths();
+                    var width = attrs.width;
+                    var height = attrs.height;
+
+                    if (angular.isDefined(attrs.imagewidth)) {
+                        width = attrs.imagewidth;
+                    }
+
+                    if (angular.isDefined(attrs.imageheight)) {
+                        height = attrs.imageheight;
+                    }
 
                     function getAvatar(dataUrl) {
                         avatarFactory.getSized({
                             path: dataUrl,
-                            width: 150,
-                            height: 150
+                            width: width,
+                            height: height
                         }).then(function (response) {
                             var data = response.data;
 
@@ -104,6 +132,14 @@
                             getAvatar(scope.userUrl);
                         }
                     });
+
+                    function refreshAvatar() {
+                        getAvatar(scope.userUrl);
+                    }
+
+                    scope.$on('avatar:clear:success', refreshAvatar);
+
+                    scope.$on('avatar:clear:error', refreshAvatar);
                 }
             };
         }

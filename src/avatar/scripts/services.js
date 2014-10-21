@@ -28,6 +28,13 @@
                             height: opts.height
                         }
                     });
+                },
+
+                clear: function (path) {
+                    return $http({
+                        method: 'DELETE',
+                        url: path
+                    });
                 }
             };
 
