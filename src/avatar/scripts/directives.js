@@ -83,7 +83,9 @@
                             path: dataUrl,
                             width: 150,
                             height: 150
-                        }).then(function (data) {
+                        }).then(function (response) {
+                            var data = response.data;
+
                             if (angular.isDefined(data.avatar)) {
                                 element[0].src = data.avatar;
                             } else {
