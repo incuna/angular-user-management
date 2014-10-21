@@ -7,7 +7,7 @@
         var apiRoot = '';
         var avatarEndpoint = '/profile/avatar';
         var defaultAvatarPaths = {
-            'thumbnail': '/avatars/avatar-300.png'
+            '300x300': '/avatars/avatar-300.png'
         };
 
         return {
