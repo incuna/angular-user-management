@@ -19,20 +19,14 @@
                     });
                 },
 
-                getSized: function (path, opts, completed) {
-                    var promise = $http({
+                getSized: function (opts) {
+                    return $http({
                         method: 'GET',
-                        url: path,
+                        url: opts.path,
                         params: {
                             width: opts.width,
                             height: opts.height
                         }
-                    });
-
-                    promise.then(function (item) {
-                        completed(item.avatar);
-                    }, function (response, error) {
-                        completed();
                     });
                 }
             };

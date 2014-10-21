@@ -75,7 +75,24 @@
                     size: '@'
                 },
                 link: function link(scope, element, attrs) {
-                    var defaults = userManagementAvatarConfig.defaultAvatarPaths();
+                    var apiRoot = userManagementAvatarConfig.apiRoot();
+                    var defaults = apiRoot + userManagementAvatarConfig.defaultAvatarPaths();
+
+                    function getAvatar(dataUrl) {
+                        avatarFactory.getSized({
+                            path: dataUrl,
+                            width: 150,
+                            height: 150
+                        }).then(function (data) {
+                            if (angular.isDefined(data.avatar)) {
+                                element[0].src = data.avatar;
+                            } else {
+                                element[0].src = defaults['thumbnail'];
+                            }
+                        }, function (error) {
+                            element[0].src = defaults['thumbnail'];
+                        });
+                    }
 
                     // wait for the URL to be populated
                     scope.$watch('userUrl', function (value) {
@@ -85,20 +102,6 @@
                             getAvatar(scope.userUrl);
                         }
                     });
-
-
-                    function getAvatar(dataUrl) {
-                        avatarFactory.getSized(dataUrl, {
-                            width: 150,
-                            height: 150
-                        }, function (data) {
-                            if (angular.isDefined(data)) {
-                                element[0].src = data;
-                            } else {
-                                element[0].src = defaults['thumbnail'];
-                            }
-                        });
-                    }
                 }
             };
         }
