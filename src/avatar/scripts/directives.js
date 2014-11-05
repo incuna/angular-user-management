@@ -1,28 +1,26 @@
 (function (angular) {
     'use strict';
 
-    var profile = angular.module('user_management.avatar');
+    var avatar = angular.module('user_management.avatar');
 
-    profile.directive('modifyAction', [
+    avatar.directive('modifyAction', [
         function () {
             return {
                 restrict: 'A',
-                link: function link(scope, element, attrs) {
-                    function setAttribute(value) {
+                link: function link (scope, element, attrs) {
+                    function setAttribute (value) {
                         if (angular.isDefined(value) && (value !== '')) {
                             element[0].action = value;
                         }
                     }
 
-                    scope.$watch('modifyAction', function (value) {
-                        setAttribute(attrs.modifyAction);
-                    });
+                    scope.$watch('modifyAction', setAttribute);
                 }
             };
         }
     ]);
 
-    profile.directive('autoSubmit', [
+    avatar.directive('autoSubmit', [
         function () {
             return {
                 restrict: 'A',
@@ -35,7 +33,7 @@
                         try {
                             document.getElementById(scope.formId).submit();
                         } catch (e) {
-                            // the user chose no file. Ignore the error.
+                            // The user didn't choose a file. Ignore the error.
                         }
                     }
 
@@ -45,11 +43,11 @@
         }
     ]);
 
-    profile.directive('avatarprofileInit', [
-        'userManagementAvatarConfig',
+    avatar.directive('avatarProfileForm', [
         '$rootScope',
+        'userManagementAvatarConfig',
         'avatarFactory',
-        function (userManagementAvatarConfig, $rootScope, avatarFactory) {
+        function ($rootScope, userManagementAvatarConfig, avatarFactory) {
             return {
                 restrict: 'A',
                 link: function link(scope, element, attrs) {
@@ -78,19 +76,16 @@
         }
     ]);
 
-    profile.directive('avatar', [
+    avatar.directive('avatar', [
         '$rootScope',
-        '$timeout',
-        '$http',
         'profileFactory',
         'avatarFactory',
         'userManagementAvatarConfig',
-        function ($rootScope, $http, $timeout, profileFactory, avatarFactory, userManagementAvatarConfig) {
+        function ($rootScope, profileFactory, avatarFactory, userManagementAvatarConfig) {
             return {
                 restrict: 'A',
                 scope: {
-                    userUrl: '@',
-                    size: '@'
+                    userUrl: '@'
                 },
                 link: function link(scope, element, attrs) {
                     var apiRoot = userManagementAvatarConfig.apiRoot();
@@ -124,7 +119,7 @@
                         });
                     }
 
-                    // wait for the URL to be populated
+                    // Wait for the URL to be populated
                     scope.$watch('userUrl', function (value) {
                         scope.userUrl = attrs.userUrl;
 
