@@ -12,29 +12,13 @@
             var module = {
                 url: apiRoot + userManagementAvatarConfig.avatarEndpoint(),
 
-                load: function (path) {
-                    return $http({
-                        method: 'GET',
-                        url: path
-                    });
+                load: function (options) {
+                    options = angular.extend({}, {method: 'GET'}, options);
+                    return $http(options);
                 },
 
-                getSized: function (opts) {
-                    return $http({
-                        method: 'GET',
-                        url: opts.path,
-                        params: {
-                            width: opts.width,
-                            height: opts.height
-                        }
-                    });
-                },
-
-                clear: function (path) {
-                    return $http({
-                        method: 'DELETE',
-                        url: path
-                    });
+                clear: function (url) {
+                    return $http.delete(url);
                 }
             };
 

@@ -102,10 +102,12 @@
                     }
 
                     function getAvatar(dataUrl) {
-                        avatarFactory.getSized({
-                            path: dataUrl,
-                            width: width,
-                            height: height
+                        avatarFactory.load({
+                            url: dataUrl,
+                            params: {
+                                width: width,
+                                height: height
+                            }
                         }).then(function (response) {
                             var data = response.data;
 
