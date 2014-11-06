@@ -13,18 +13,21 @@
 <div class="form-group" ng-class="{'has-error': fields.avatar.errors}">
     <label for="avatar" ng-if="fields.avatar.label">{{ fields.avatar.label }}</label>
 
-    <img avatar user-url="{{ avatarUploadUrl }}" width="150" height="150" />
+    <img avatar user-url="{{ avatarUploadUrl }}" image-width="300" image-height="300" width="150" height="150">
 
-    <input type="text" name="token" value="{{ token }}" />
+    <input type="hidden" name="token" value="{{ token }}">
 
-    <div class="lozenge avatar-upload-wrapper">
-        <span class="avatar-upload-target">Upload Picture</span>
-        <br/>
-        <input type="file" name="avatar" auto-submit form-id="profileForm" />
+    <input type="hidden" name="redirect_url" value="{{ absUrl }}">
+
+    <div class="avatar-upload-wrapper">
+        <span class="avatar-upload-target">Upload avatar</span>
+        <br>
+        <input type="file" name="avatar" auto-submit form-id="profileForm">
     </div>
 
-    <button type="button" ng-click="clearAvatar($event);">Clear Avatar</button>
+    <button type="button" ng-click="clearAvatar($event)">Clear avatar</button>
+
+    <div class="help-block" ng-if="errors.avatar" ng-bind="errors.avatar"></div>
 </div>
 
 <button type="submit" class="btn btn-default">Update profile</button>
-
