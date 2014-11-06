@@ -14,7 +14,9 @@
                         }
                     }
 
-                    scope.$watch('modifyAction', setAttribute);
+                    attrs.$observe('modifyAction', function () {
+                        setAttribute(attrs.modifyAction)
+                    });
                 }
             };
         }
@@ -47,13 +49,16 @@
         '$rootScope',
         'userManagementAvatarConfig',
         'avatarFactory',
-        function ($rootScope, userManagementAvatarConfig, avatarFactory) {
+        '$location',
+        function ($rootScope, userManagementAvatarConfig, avatarFactory, $location) {
             return {
                 restrict: 'A',
                 link: function link(scope, element, attrs) {
                     var apiRoot = userManagementAvatarConfig.apiRoot();
                     scope.avatarUploadUrl = apiRoot + userManagementAvatarConfig.avatarEndpoint();
-                    scope.token = $rootScope.usertoken;
+                    scope.token = $rootScope.userToken;
+                    // If we need to tell the API where to redirect us after posting the form.
+                    scope.absUrl = $location.$$absUrl;
 
                     function clearAvatarSuccess(response) {
                         scope.$broadcast('avatar:clear:success', response);
@@ -89,16 +94,16 @@
                 },
                 link: function link(scope, element, attrs) {
                     var apiRoot = userManagementAvatarConfig.apiRoot();
-                    var defaults = apiRoot + userManagementAvatarConfig.defaultAvatarPaths();
+                    var avatarDefaults = apiRoot + userManagementAvatarConfig.defaultAvatarPaths();
                     var width = attrs.width;
                     var height = attrs.height;
 
-                    if (angular.isDefined(attrs.imagewidth)) {
-                        width = attrs.imagewidth;
+                    if (angular.isDefined(attrs.imageWidth)) {
+                        width = attrs.imageWidth;
                     }
 
-                    if (angular.isDefined(attrs.imageheight)) {
-                        height = attrs.imageheight;
+                    if (angular.isDefined(attrs.imageHeight)) {
+                        height = attrs.imageHeight;
                     }
 
                     function getAvatar(dataUrl) {
@@ -114,10 +119,10 @@
                             if (angular.isDefined(data.avatar)) {
                                 element[0].src = data.avatar;
                             } else {
-                                element[0].src = defaults['thumbnail'];
+                                element[0].src = avatarDefaults.default;
                             }
                         }, function (error) {
-                            element[0].src = defaults['thumbnail'];
+                            element[0].src = avatarDefaults.default;
                         });
                     }
 
