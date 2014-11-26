@@ -1,5 +1,5 @@
 <div class="alert alert-success" ng-if="email">
-    <p>We've sent an email to {{ email }} containing a link to change your password.</p>
+    <p translate>We've sent an email to {{ email }} containing a link to change your password.</p>
 </div>
 
 <div class="form-group" ng-class="{'has-error': errors.email}">
@@ -8,4 +8,4 @@
     <div class="help-block" ng-if="errors.email" ng-bind="error.email"></div>
 </div>
 
-<button type="submit" class="btn btn-default">Reset password</button>
+<button type="submit" class="btn btn-default" translate>Reset password</button>
