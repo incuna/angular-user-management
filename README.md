@@ -24,3 +24,7 @@ angular.module('app', [
 These settings are extended with defaults defined in the services so you can provide values to override with here.
 
 It's planned to deprecate this method of configuring settings, moving towards a factory of settings.
+
+# i18n
+
+All strings are marked as translatable using [angular-gettext](https://github.com/rubenv/angular-gettext) syntax.
