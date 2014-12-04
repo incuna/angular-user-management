@@ -9,7 +9,8 @@
             $routeProvider
                 .when('/register/', {
                     templateUrl: 'templates/user_management/registration/register.html',
-                    controller: 'RegistrationCtrl'
+                    controller: 'RegistrationCtrl',
+                    anonymousOnly: true
                 });
         }
     ]);

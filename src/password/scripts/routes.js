@@ -9,11 +9,13 @@
             $routeProvider
                 .when('/password-reset/', {
                     templateUrl: 'templates/user_management/password/reset_request.html',
-                    controller: 'PasswordResetRequestCtrl'
+                    controller: 'PasswordResetRequestCtrl',
+                    anonymousOnly: true
                 })
                 .when('/password-change/:token*\/', {
                     templateUrl: 'templates/user_management/password/change.html',
-                    controller: 'PasswordChangeCtrl'
+                    controller: 'PasswordChangeCtrl',
+                    anonymousOnly: true
                 });
         }
     ]);
