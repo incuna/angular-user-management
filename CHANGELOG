@@ -1,3 +1,7 @@
+# 1.2.0
+
+* Mark all strings as translatable using angular-gettext syntax.
+
 # 1.1.0
 
 * Added success and error data to scopes.
