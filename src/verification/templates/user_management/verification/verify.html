@@ -4,6 +4,12 @@
     </div>
 
     <div ng-show="status === 403">
-        <p translate>There was a problem verifying your account, you may have already verified it. Please try logging in.</p>
+        <p translate>You have already verified your account. Please log in.</p>
+    </div>
+
+    <div ng-show="status === 404 || invalid">
+        <p translate>There was a problem with your verification code. Please request a new one using the form below.</p>
+
+        <form verification-resend ng-submit="resend()"></form>
     </div>
 </div>
