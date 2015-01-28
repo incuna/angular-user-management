@@ -1,0 +1,10 @@
+<div class="alert alert-success" ng-if="status === 204">
+    <p translate>We've sent a verification code to {{ data.email }}, please check your email to continue.</p>
+</div>
+
+<div class="form-group" ng-class="{'has-error': errors.email}">
+    <label for="email" translate>Email address</label>
+    <input type="email" ng-model="data.email" class="form-control" id="email">
+    <div class="help-block" ng-if="errors.email" ng-bind="errors.email"></div>
+</div>
+<button type="submit" class="btn btn-default" translate>Resend verification email</button>

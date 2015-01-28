@@ -6,6 +6,7 @@
     module.provider('userManagementVerificationConfig', function () {
         var apiRoot = '';
         var verificationEndpoint = '/verify_email';
+        var verificationResendEndpoint = '/resend-confirmation-email';
 
         return {
             $get: function () {
@@ -15,6 +16,9 @@
                     },
                     verificationEndpoint: function () {
                         return verificationEndpoint;
+                    },
+                    verificationResendEndpoint: function () {
+                        return verificationResendEndpoint;
                     }
                 };
             },
@@ -23,6 +27,9 @@
             },
             setVerificationEndpoint: function (value) {
                 verificationEndpoint = value;
+            },
+            setVerificationResendEndpoint: function (value) {
+                verificationResendEndpoint = value;
             }
         };
     });
