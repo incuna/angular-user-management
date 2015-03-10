@@ -66,6 +66,10 @@ module.exports = function (grunt) {
             templates: {
                 files: 'src/**/templates/**/*.html',
                 tasks: 'ngtemplates'
+            },
+            js: {
+                files: 'src/**/scripts/**/*.js',
+                tasks: 'dist-js'
             }
         },
         ngtemplates: _.extend({
@@ -83,10 +87,14 @@ module.exports = function (grunt) {
         }, uglifyConfig)
     });
 
-    grunt.registerTask('default', [
+    grunt.registerTask('dist-js', [
         'concat',
-        'ngtemplates',
         'uglify'
+    ]);
+
+    grunt.registerTask('default', [
+        'dist-js',
+        'ngtemplates'
     ]);
 
 };
