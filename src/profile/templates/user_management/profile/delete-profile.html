@@ -1,0 +1,9 @@
+<div class="notification-header">
+    <span ng-show="!failed" translate>You are about to permanently delete your profile and all associated data. This cannot be undone. Please confirm you would like to proceed.</span>
+    <span ng-show="failed" translate>Delete failed, please try again later.</span>
+</div>
+
+<div class="actions">
+    <button ng-click="deleteProfile()" class="action button right-arrow seperated tick" translate>Delete</button>
+    <button ng-click="close()" class="action button right-arrow seperated cancel" translate>Cancel</button>
+</div>
