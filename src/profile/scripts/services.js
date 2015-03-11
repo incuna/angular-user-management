@@ -23,6 +23,12 @@
                         url: profile.url
                     });
                 },
+                deleteData: function(){
+                    return $http({
+                        method: 'DELETE',
+                        url: profile.url
+                    });
+                },
                 patch: function (data) {
                     return $http({
                         method: 'PATCH',

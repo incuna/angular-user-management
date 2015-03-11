@@ -11,9 +11,12 @@
                     templateUrl: 'templates/user_management/profile/profile.html',
                     controller: 'ProfileCtrl',
                     anonymous: false
+                })
+                .when('/delete-profile-confirmation/', {
+                    templateUrl: 'templates/user_management/profile/delete-profile-confirmation.html',
+                    controller: 'ProfileDeletedCtrl'
                 });
         }
     ]);
 
 }(window.angular));
-
