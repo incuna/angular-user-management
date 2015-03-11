@@ -76,7 +76,6 @@
                 link: function (scope, element, attrs) {
 
                     scope.deleteProfile = function () {
-                        console.log(scope.failed);
                         $modal.open({
                             templateUrl: 'templates/user_management/profile/delete-profile.html',
                             windowClass: 'delete-profile',
