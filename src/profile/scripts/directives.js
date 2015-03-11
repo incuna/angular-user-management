@@ -90,7 +90,6 @@
                                     profileFactory.profile.deleteData().then(function(){
                                         $modalInstance.dismiss('close');
                                         $location.path($filter('reverseUrl')('ProfileDeletedCtrl').substring(1));
-
                                     },
                                     function(){
                                         $scope.failed = true;
