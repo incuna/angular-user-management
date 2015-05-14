@@ -20,41 +20,43 @@
                         });
 
                     scope.register = function () {
-                        optionsPromise
-                            .then(function () {
-                                scope.loading = true;
-                                scope.registered = false;
+                        if (!scope.loading) {
+                            optionsPromise
+                                .then(function () {
+                                    scope.loading = true;
+                                    scope.registered = false;
 
-                                scope.successData = undefined;
-                                scope.errorData = undefined;
+                                    scope.successData = undefined;
+                                    scope.errorData = undefined;
 
-                                // Clear all errors on the fields object.
-                                angular.forEach(scope.fields, function(value, key){
-                                    value.errors = '';
-                                });
-                                scope.errors = {};
-
-                                registrationFactory
-                                    .register.post(scope.data)
-                                    .then(function (response) {
-                                        scope.data = {};
-                                        scope.registered = true;
-                                        scope.successData = response.data;
-                                    }, function (response) {
-                                        scope.errorData = response.data;
-
-                                        angular.forEach(response.data, function (error, field) {
-                                            error = angular.isArray(error) ? error[0] : error;
-                                            if (angular.isDefined(scope.fields[field])) {
-                                                scope.fields[field].errors = error;
-                                            }
-                                            scope.errors[field] = error;
-                                        });
-                                    })
-                                    ['finally'](function () {
-                                        scope.loading = false;
+                                    // Clear all errors on the fields object.
+                                    angular.forEach(scope.fields, function(value, key){
+                                        value.errors = '';
                                     });
-                            });
+                                    scope.errors = {};
+
+                                    registrationFactory
+                                        .register.post(scope.data)
+                                        .then(function (response) {
+                                            scope.data = {};
+                                            scope.registered = true;
+                                            scope.successData = response.data;
+                                        }, function (response) {
+                                            scope.errorData = response.data;
+
+                                            angular.forEach(response.data, function (error, field) {
+                                                error = angular.isArray(error) ? error[0] : error;
+                                                if (angular.isDefined(scope.fields[field])) {
+                                                    scope.fields[field].errors = error;
+                                                }
+                                                scope.errors[field] = error;
+                                            });
+                                        })
+                                        ['finally'](function () {
+                                            scope.loading = false;
+                                        });
+                                });
+                        }
                     };
                 }
             };
