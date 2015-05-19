@@ -24,7 +24,7 @@
                             scope.fields = response.data.actions.PUT;
                         });
 
-                    scope.editProfile = function () {
+                    scope.editProfile = function (localStorageVar) {
                         if (!scope.loading) {
                             optionsPromise
                                 .then(function () {
@@ -44,6 +44,11 @@
                                         .profile.patch(scope.data)
                                         .then(function (response) {
                                             scope.data = response.data;
+                                            if (angular.isDefined(localStorageVar) {
+                                                angular.forEach(response.data, function (value, key) {
+                                                    localStorageVar[key] = value;
+                                                });
+                                            }
                                             scope.updated = true;
                                             scope.successData = response.data;
                                         }, function (response) {
