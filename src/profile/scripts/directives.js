@@ -35,7 +35,7 @@
                                     scope.errorData = undefined;
 
                                     // Clear all errors on the fields object.
-                                    angular.forEach(scope.fields, function(value, key){
+                                    angular.forEach(scope.fields, function (value, key) {
                                         value.errors = '';
                                     });
                                     scope.errors = {};
@@ -44,7 +44,7 @@
                                         .profile.patch(scope.data)
                                         .then(function (response) {
                                             scope.data = response.data;
-                                            if (angular.isDefined(localStorageVar) {
+                                            if (angular.isDefined(localStorageVar)) {
                                                 angular.forEach(response.data, function (value, key) {
                                                     localStorageVar[key] = value;
                                                 });
@@ -92,12 +92,12 @@
                                 $scope.close = function () {
                                     $modalInstance.dismiss('close');
                                 };
-                                $scope.deleteProfile = function(){
-                                    profileFactory.profile.deleteData().then(function(){
+                                $scope.deleteProfile = function () {
+                                    profileFactory.profile.deleteData().then(function () {
                                         $modalInstance.dismiss('close');
                                         $location.path($filter('reverseUrl')('ProfileDeletedCtrl').substring(1));
                                     },
-                                    function(){
+                                    function () {
                                         $scope.failed = true;
                                     });
                                 };
