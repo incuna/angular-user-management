@@ -25,6 +25,8 @@
                         });
 
                     scope.editProfile = function (localStorageVar) {
+                        // Use localStorageVar (optional) to pass a reference to an object which is used in the page view, eg. to display the user name, so it can be updated without refreshing.
+                        
                         if (!scope.loading) {
                             optionsPromise
                                 .then(function () {
