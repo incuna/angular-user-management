@@ -24,9 +24,9 @@
                             scope.fields = response.data.actions.PUT;
                         });
 
-                    scope.editProfile = function (localStorageVar) {
-                        // Use localStorageVar (optional) to pass a reference to an object which is used in the page view, eg. to display the user name, so it can be updated without refreshing.
-                        
+                    scope.editProfile = function (scopeObject) {
+                        // Use scopeObject (optional) to pass a reference to an object which is used in the page view, eg. to display the user name, so it can be updated without refreshing.
+                        //
                         if (!scope.loading) {
                             optionsPromise
                                 .then(function () {
@@ -46,9 +46,9 @@
                                         .profile.patch(scope.data)
                                         .then(function (response) {
                                             scope.data = response.data;
-                                            if (angular.isDefined(localStorageVar)) {
+                                            if (angular.isDefined(scopeObject)) {
                                                 angular.forEach(response.data, function (value, key) {
-                                                    localStorageVar[key] = value;
+                                                    scopeObject[key] = value;
                                                 });
                                             }
                                             scope.updated = true;
