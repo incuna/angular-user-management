@@ -24,7 +24,9 @@
                             scope.fields = response.data.actions.PUT;
                         });
 
-                    scope.editProfile = function () {
+                    scope.editProfile = function (scopeObject) {
+                        // Use scopeObject (optional) to pass a reference to an object which is used in the page view, eg. to display the user name, so it can be updated without refreshing.
+                        //
                         if (!scope.loading) {
                             optionsPromise
                                 .then(function () {
@@ -35,7 +37,7 @@
                                     scope.errorData = undefined;
 
                                     // Clear all errors on the fields object.
-                                    angular.forEach(scope.fields, function(value, key){
+                                    angular.forEach(scope.fields, function (value, key) {
                                         value.errors = '';
                                     });
                                     scope.errors = {};
@@ -44,6 +46,11 @@
                                         .profile.patch(scope.data)
                                         .then(function (response) {
                                             scope.data = response.data;
+                                            if (angular.isDefined(scopeObject)) {
+                                                angular.forEach(response.data, function (value, key) {
+                                                    scopeObject[key] = value;
+                                                });
+                                            }
                                             scope.updated = true;
                                             scope.successData = response.data;
                                         }, function (response) {
@@ -87,12 +94,12 @@
                                 $scope.close = function () {
                                     $modalInstance.dismiss('close');
                                 };
-                                $scope.deleteProfile = function(){
-                                    profileFactory.profile.deleteData().then(function(){
+                                $scope.deleteProfile = function () {
+                                    profileFactory.profile.deleteData().then(function () {
                                         $modalInstance.dismiss('close');
                                         $location.path($filter('reverseUrl')('ProfileDeletedCtrl').substring(1));
                                     },
-                                    function(){
+                                    function () {
                                         $scope.failed = true;
                                     });
                                 };
