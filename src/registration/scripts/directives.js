@@ -4,14 +4,26 @@
     var module = angular.module('user_management.registration');
 
     module.directive('registerForm', [
+        '$parse',
         'registrationFactory',
-        function (registrationFactory) {
+        function ($parse, registrationFactory) {
             return {
                 restrict: 'A',
                 scope: true,
                 templateUrl: 'templates/user_management/registration/register_form.html',
                 link: function (scope, element, attrs) {
                     scope.data = {};
+
+                    // Bind on-success attribute to success callback
+                    // scope: { success: '&on-success' }
+                    if (angular.isDefined(attrs.onSuccess)) {
+                        var parentGet = $parse(attrs.onSuccess);
+                        if (parentGet !== angular.noop) {
+                            scope.success = function(locals) {
+                                return parentGet(scope.$parent, locals);
+                            };
+                        }
+                    }
 
                     var optionsPromise = registrationFactory.register.options();
                     optionsPromise
@@ -40,7 +52,9 @@
                                         .then(function (response) {
                                             scope.data = {};
                                             scope.registered = true;
-                                            scope.successData = response.data;
+                                            if (angular.isDefined(attrs.onSuccess)) {
+                                                scope.success({user: response});
+                                            }
                                         }, function (response) {
                                             scope.errorData = response.data;
 
