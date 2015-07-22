@@ -1,3 +1,7 @@
+<div class="alert alert-success" ng-show="requested && data.phone_number">
+    <p translate>We've sent a message to {{ data.phone_number }} containing a code to change your password.</p>
+</div>
+
 <div class="alert alert-success" ng-show="changed">
     <p translate>You've successfully changed your password.</p>
 </div>
@@ -7,6 +11,9 @@
     <input type="text" ng-model="data.phone_number" class="form-control" id="phone_number" autofocus>
     <div class="help-block" ng-show="errors.phone_number" ng-bind="errors.phone_number"></div>
 </div>
+
+<button type="submit" class="btn btn-default"  ng-click="resetRequest()" translate>Request code</button>
+
 
 <div class="form-group" ng-class="{'has-error': errors.activation_code}">
     <label for="activation_code" ng-show="fields.activation_code.label" ng-bind="fields.activation_code.label"></label>

@@ -34,7 +34,7 @@
                         url: change.url
                     });
                 },
-                put: function (data) {
+                post: function (data) {
                     return $http({
                         method: 'POST',
                         url: change.url,
