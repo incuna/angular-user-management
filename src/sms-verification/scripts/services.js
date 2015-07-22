@@ -10,23 +10,18 @@
             var apiRoot = userManagementSmsVerificationConfig.apiRoot();
 
             var verify =  {
-                post: function (activationCode, phoneNumber) {
+                post: function (data) {
                     return $http({
                         method: 'POST',
                         url: apiRoot + userManagementSmsVerificationConfig.verificationEndpoint(),
-                        data: {
-                            phone_number: phoneNumber,
-                            activation_code: activationCode
-                        }
+                        data: data
                     });
                 },
-                resend: function (phoneNumber) {
+                resend: function (data) {
                     return $http({
                         method: 'POST',
                         url: apiRoot + userManagementSmsVerificationConfig.verificationResendEndpoint(),
-                        data: {
-                            phone_number: phoneNumber
-                        }
+                        data: data
                     });
                 }
             };

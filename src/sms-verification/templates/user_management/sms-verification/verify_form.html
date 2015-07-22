@@ -7,12 +7,12 @@
 
 <div class="form-group" ng-class="{'has-error': errors.phone_number}">
     <label for="phone_number" translate>Phone number</label>
-    <input type="phone_number" ng-model="data.phone_number" class="form-control" id="phone_number">
+    <input type="text" ng-model="data.phone_number" class="form-control" id="phone_number">
     <div class="help-block" ng-if="errors.phone_number" ng-bind="errors.phone_number"></div>
 </div>
 <div class="form-group" ng-class="{'has-error': errors.activation_code}">
     <label for="activation_code" translate>Activation code</label>
-    <input type="activation_code" ng-model="data.activation_code" class="form-control" id="activation_code">
+    <input type="text" ng-model="data.activation_code" class="form-control" id="activation_code">
     <div class="help-block" ng-if="errors.activation_code" ng-bind="errors.activation_code"></div>
 </div>
 

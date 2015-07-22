@@ -15,11 +15,11 @@
                     scope.data = {};
 
                     // Bind on-success attribute to success callback
-                    // scope: { success: '&on-success' }
-                    if (angular.isDefined(attrs.onSuccess)) {
-                        var parentGet = $parse(attrs.onSuccess);
+                    // scope: { onRegister: '&' }
+                    if (angular.isDefined(attrs.onRegister)) {
+                        var parentGet = $parse(attrs.onRegister);
                         if (parentGet !== angular.noop) {
-                            scope.success = function(locals) {
+                            scope.onRegister = function(locals) {
                                 return parentGet(scope.$parent, locals);
                             };
                         }
@@ -50,11 +50,11 @@
                                     registrationFactory
                                         .register.post(scope.data)
                                         .then(function (response) {
-                                            scope.data = {};
                                             scope.registered = true;
-                                            if (angular.isDefined(attrs.onSuccess)) {
-                                                scope.success({user: response});
+                                            if (angular.isDefined(scope.onRegister)) {
+                                                scope.onRegister({user: angular.copy(scope.data)});
                                             }
+                                            scope.data = {};
                                         }, function (response) {
                                             scope.errorData = response.data;
 

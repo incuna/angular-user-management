@@ -10,49 +10,45 @@
         function ($parse, $routeParams, smsVerificationFactory) {
             return {
                 restrict: 'A',
-                scope: true,
+                scope: {
+                    data: '=?smsVerify',
+                    onVerify: '&',
+                    onResend: '&'
+                },
                 templateUrl: 'templates/user_management/sms-verification/verify_form.html',
                 link: function (scope, element, attrs) {
-
-                    // 2-way bind data attribute to scope.
-                    // scope: { data: '=' }
-                    if (angular.isDefined(attrs.data)) {
-                        // Set scope.data form attrs.data.
-                        scope.$watch(attrs.data, function(data) {
-                            scope.data = data;
-                        });
-                        // Set attrs.data from scope.data.
-                        var parentAssign = $parse(attrs.data).assign;
-                        scope.$watch('data', function(data) {
-                            parentAssign(scope.$parent, data)
-                        });
-                    }
-
                     scope.verify = function () {
                         scope.verified = false;
+                        scope.resent = false;
                         smsVerificationFactory
-                            .verify.post(scope.data.activation_code, scope.data.phone_number)
+                            .verify.post(scope.data)
                             .then(function (response) {
                                 scope.status = response.status;
                                 scope.verified = true;
-                            }, function (response) {
+                                if (angular.isDefined(scope.onVerify)) {
+                                    scope.onVerify({verifyData: angular.copy(scope.data)});
+                                }
+                            })
+                            .catch(function (response) {
                                 scope.status = response.status;
                                 scope.errors = response.data;
-
-                                if (response.status === 400 && response.data.detail === 'Invalid or expired code.') {
-                                   scope.invalid = true;
-                                }
                             });
                     };
 
                     scope.resend = function () {
+                        scope.verified = false;
                         scope.resent = false;
                         smsVerificationFactory
-                            .verify.resend(scope.data.phone_number)
+                            .verify.resend(scope.data)
                             .then(function (response) {
                                 scope.resent = true;
                                 scope.status = response.status;
-                            }, function (response) {
+                                if (angular.isDefined(scope.onResend)) {
+                                    scope.onResend({resendData: angular.copy(scope.data)});
+                                }
+                            })
+                            .catch(function (response) {
+                                scope.status = response.status;
                                 scope.errors = response.data;
                             });
                     }
