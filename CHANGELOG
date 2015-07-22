@@ -1,3 +1,8 @@
+# UPCOMING
+
+* Add sms-verification functionality to verify users using a phone number and
+an activation code (that is sent to the phone number by the api).
+
 # 1.6.3
 
 * Add an argument to `editProfile()` to reference an object which is used to

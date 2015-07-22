@@ -4,14 +4,26 @@
     var module = angular.module('user_management.registration');
 
     module.directive('registerForm', [
+        '$parse',
         'registrationFactory',
-        function (registrationFactory) {
+        function ($parse, registrationFactory) {
             return {
                 restrict: 'A',
                 scope: true,
                 templateUrl: 'templates/user_management/registration/register_form.html',
                 link: function (scope, element, attrs) {
                     scope.data = {};
+
+                    // Bind on-success attribute to success callback
+                    // scope: { onRegister: '&' }
+                    if (angular.isDefined(attrs.onRegister)) {
+                        var parentGet = $parse(attrs.onRegister);
+                        if (parentGet !== angular.noop) {
+                            scope.onRegister = function(locals) {
+                                return parentGet(scope.$parent, locals);
+                            };
+                        }
+                    }
 
                     var optionsPromise = registrationFactory.register.options();
                     optionsPromise
@@ -38,9 +50,11 @@
                                     registrationFactory
                                         .register.post(scope.data)
                                         .then(function (response) {
-                                            scope.data = {};
                                             scope.registered = true;
-                                            scope.successData = response.data;
+                                            if (angular.isDefined(scope.onRegister)) {
+                                                scope.onRegister({user: angular.copy(scope.data)});
+                                            }
+                                            scope.data = {};
                                         }, function (response) {
                                             scope.errorData = response.data;
 
