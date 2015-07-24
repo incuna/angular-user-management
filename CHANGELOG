@@ -1,7 +1,7 @@
-# UPCOMING
+# 1.7.0
 
-* Add sms-verification functionality to verify users using a phone number and
-an activation code (that is sent to the phone number by the api).
+* Add sms-verification functionality to verify users using a phone number and an activation code (that is sent to the phone number by the api).
+* Add SMS password reset functionality to allow user to reset their password using a phone number and an activation code (that is sent to the phone number by the api).
 
 # 1.6.3
 
