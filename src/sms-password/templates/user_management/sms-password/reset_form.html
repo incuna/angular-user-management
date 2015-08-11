@@ -33,5 +33,8 @@
     <div class="help-block" ng-show="errors.new_password2" ng-bind="errors.new_password2"></div>
 </div>
 
+<div class="help-block" ng-if="errors.detail" ng-bind="errors.detail"></div>
+<div class="help-block" ng-if="errors.non_field_errors" ng-bind="errors.non_field_errors"></div>
+
 <button type="submit" class="btn btn-default" ng-click="changePassword()" translate>Update password</button>
 
