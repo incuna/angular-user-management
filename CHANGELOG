@@ -1,3 +1,7 @@
+# UPCOMING
+
+* In password-reset display error message from API if we have one or display the template one otherwise
+
 # 1.7.0
 
 * Add sms-verification functionality to verify users using a phone number and an activation code (that is sent to the phone number by the api).

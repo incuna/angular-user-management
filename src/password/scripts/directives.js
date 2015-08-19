@@ -57,7 +57,7 @@
                                         });
                                 });
                         }
-                    };
+                   };
                 }
             };
         }
@@ -90,10 +90,11 @@
                         .then(function (response) {
                             scope.fields = response.data.actions.PUT;
                         }, function (response) {
-                            // If the response returns a 404 and we have a token.
-                            if (response.status === 404 && angular.isDefined(TOKEN)) {
-                                // There was a problem with the token.
+                            if (angular.isDefined(TOKEN)) {
                                 scope.tokenError = true;
+                            }
+                            if (angular.isDefined(response.data) && angular.isDefined(response.data.detail)) {
+                                scope.errorMessage = response.data.detail;
                             }
                         });
 
