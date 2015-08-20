@@ -94,6 +94,7 @@
                 templateUrl: 'templates/user_management/password/change_form.html',
                 link: function (scope, element, attrs) {
                     scope.data = {};
+                    scope.errors = {};
 
                     // If there is a URL fragment named `token` in the current route then
                     // we shall assume we are changing a forgotten password.
