@@ -5,22 +5,24 @@
 
     module.service('catchErrors', [
         function () {
-            this.all = function (fields, response) {
+            this.all = function (response, fields) {
                 var fieldErrors = {};
-                fieldErrors.fields = angular.copy(fields);
-                var errors = {};
+                if (angular.isDefined(fields)) {
+                    fieldErrors.fields = angular.copy(fields);
+                }
+                var nonFieldErrors = {};
 
                 angular.forEach(response.data, function (error, field) {
                     error = angular.isArray(error) ? error[0] : error;
                     if (angular.isDefined(fields[field])) {
-                        fieldErrors.fields[field].errors = error;
+                        fieldErrors.fields[field].nonFieldErrors = error;
                     }
-                    errors[field] = error;
+                    nonFieldErrors[field] = error;
                 });
 
                 return {
                     fieldErrors: fieldErrors,
-                    errors: errors
+                    nonFieldErrors: nonFieldErrors
                 }
             }
         }
@@ -68,8 +70,8 @@
                                         }, function (response) {
                                             scope.errorData = response.data;
 
-                                            var errors = catchErrors.all(scope.fields, response);
-                                            angular.merge(scope.errors, errors.errors);
+                                            var errors = catchErrors.all(response, scope.fields);
+                                            angular.merge(scope.errors, errors.nonFieldErrors);
                                             angular.merge(scope.fields, errors.fieldErrors);
                                         })
                                         ['finally'](function () {
@@ -116,8 +118,8 @@
                                 scope.tokenError = true;
                             }
                             if (response.status !== 404 && angular.isDefined(response.data)) {
-                                var errors = catchErrors.all({}, response);
-                                angular.merge(scope.errors, errors.errors);
+                                var errors = catchErrors.all(response);
+                                angular.merge(scope.errors, errors.nonFieldErrors);
                             }
                         });
 
@@ -159,8 +161,8 @@
                                         ['catch'](function (response) {
                                             scope.errorData = response.data;
 
-                                            var errors = catchErrors.all(scope.fields, response);
-                                            angular.merge(scope.errors, errors.errors);
+                                            var errors = catchErrors.all(response, scope.fields);
+                                            angular.merge(scope.errors, errors.nonFieldErrors);
                                             angular.merge(scope.fields, errors.fieldErrors);
 
                                         })
