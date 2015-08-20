@@ -1,6 +1,7 @@
 # UPCOMING
 
-* In password-reset display error message from API if we have one or display the template one otherwise
+* In password-reset display messages from API if status !== 400
+* *Breaking change* Moved some common functionality to `common.js`. In projects `common.js` must be imported before any other module from this library.
 
 # 1.7.0
 
