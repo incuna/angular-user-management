@@ -115,7 +115,7 @@
                             if (angular.isDefined(TOKEN)) {
                                 scope.tokenError = true;
                             }
-                            if (response.status !== '404' && angular.isDefined(response.data)) {
+                            if (response.status !== 404 && angular.isDefined(response.data)) {
                                 var errors = catchErrors.all({}, response);
                                 angular.merge(scope.errors, errors.errors);
                             }
