@@ -3,9 +3,33 @@
 
     var module = angular.module('user_management.password');
 
+    module.service('catchErrors', [
+        function () {
+            this.all = function (fields, response) {
+                fieldErrors = {};
+                fieldErrors.fields = angular.copy(fields);
+                errors = {};
+
+                angular.forEach(response.data, function (error, field) {
+                    error = angular.isArray(error) ? error[0] : error;
+                    if (angular.isDefined(fields[field])) {
+                        fieldErrors.fields[field].errors = error;
+                    }
+                    errors[field] = error;
+                });
+
+                return {
+                    fieldErrors: fieldErrors,
+                    errors: errors
+                }
+            }
+        }
+    ]);
+
     module.directive('passwordResetRequestForm', [
         'passwordFactory',
-        function (passwordFactory) {
+        'catchErrors',
+        function (passwordFactory, catchErrors) {
             return {
                 restrict: 'A',
                 scope: true,
@@ -44,13 +68,17 @@
                                         }, function (response) {
                                             scope.errorData = response.data;
 
-                                            angular.forEach(response.data, function (error, field) {
-                                                error = angular.isArray(error) ? error[0] : error;
-                                                if (angular.isDefined(scope.fields[field])) {
-                                                    scope.fields[field].errors = error;
-                                                }
-                                                scope.errors[field] = error;
-                                            });
+                                        //    angular.forEach(response.data, function (error, field) {
+                                        //        error = angular.isArray(error) ? error[0] : error;
+                                        //        if (angular.isDefined(scope.fields[field])) {
+                                        //            scope.fields[field].errors = error;
+                                        //        }
+                                        //        scope.errors[field] = error;
+                                        //    });
+
+                                            var errors = catchErrors.all(scope.fields, response);
+                                            angular.merge(scope.errors, errors.errors);
+                                            angular.merge(scope.fields, errors.fieldErrors);
                                         })
                                         ['finally'](function () {
                                             scope.loading = false;
@@ -66,13 +94,15 @@
     module.directive('passwordChangeForm', [
         '$route',
         'passwordFactory',
-        function ($route, passwordFactory) {
+        'catchErrors',
+        function ($route, passwordFactory, catchErrors) {
             return {
                 restrict: 'A',
                 scope: true,
                 templateUrl: 'templates/user_management/password/change_form.html',
                 link: function (scope, element, attrs) {
                     scope.data = {};
+                    scope.errors = {};
 
                     // If there is a URL fragment named `token` in the current route then
                     // we shall assume we are changing a forgotten password.
@@ -93,8 +123,9 @@
                             if (angular.isDefined(TOKEN)) {
                                 scope.tokenError = true;
                             }
-                            if (angular.isDefined(response.data) && angular.isDefined(response.data.detail)) {
-                                scope.errorMessage = response.data.detail;
+                            if (response.status !== '404' && angular.isDefined(response.data)) {
+                                var errors = catchErrors.all({}, response);
+                                angular.merge(scope.errors, errors.errors);
                             }
                         });
 
@@ -136,13 +167,17 @@
                                         ['catch'](function (response) {
                                             scope.errorData = response.data;
 
-                                            angular.forEach(response.data, function (error, field) {
-                                                error = angular.isArray(error) ? error[0] : error;
-                                                if (angular.isDefined(scope.fields[field])) {
-                                                    scope.fields[field].errors = error;
-                                                }
-                                                scope.errors[field] = error;
-                                            });
+                                            var errors = catchErrors.all(scope.fields, response);
+                                            angular.merge(scope.errors, errors.errors);
+                                            angular.merge(scope.fields, errors.fieldErrors);
+
+                                           // angular.forEach(response.data, function (error, field) {
+                                           //     error = angular.isArray(error) ? error[0] : error;
+                                           //     if (angular.isDefined(scope.fields[field])) {
+                                           //         scope.fields[field].errors = error;
+                                           //     }
+                                           //     scope.errors[field] = error;
+                                           // });
                                         })
                                         ['finally'](function () {
                                             scope.loading = false;
