@@ -5,7 +5,8 @@
 
     module.directive('profileForm', [
         'profileFactory',
-        function (profileFactory) {
+        'catchErrors',
+        function (profileFactory, catchErrors) {
             return {
                 restrict: 'A',
                 scope: true,
@@ -56,13 +57,10 @@
                                         }, function (response) {
                                             scope.errorData = response.data;
 
-                                            angular.forEach(response.data, function (error, field) {
-                                                error = angular.isArray(error) ? error[0] : error;
-                                                if (angular.isDefined(scope.fields[field])) {
-                                                    scope.fields[field].errors = error;
-                                                }
-                                                scope.errors[field] = error;
-                                            });
+                                            var errors = catchErrors.all(response, scope.fields);
+                                            angular.merge(scope.errors, errors.nonFieldErrors);
+                                            angular.merge(scope.fields, errors.fieldErrors);
+
                                         })
                                         ['finally'](function () {
                                             scope.loading = false;
