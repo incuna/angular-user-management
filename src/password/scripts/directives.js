@@ -6,9 +6,9 @@
     module.service('catchErrors', [
         function () {
             this.all = function (fields, response) {
-                fieldErrors = {};
+                var fieldErrors = {};
                 fieldErrors.fields = angular.copy(fields);
-                errors = {};
+                var errors = {};
 
                 angular.forEach(response.data, function (error, field) {
                     error = angular.isArray(error) ? error[0] : error;
@@ -68,14 +68,6 @@
                                         }, function (response) {
                                             scope.errorData = response.data;
 
-                                        //    angular.forEach(response.data, function (error, field) {
-                                        //        error = angular.isArray(error) ? error[0] : error;
-                                        //        if (angular.isDefined(scope.fields[field])) {
-                                        //            scope.fields[field].errors = error;
-                                        //        }
-                                        //        scope.errors[field] = error;
-                                        //    });
-
                                             var errors = catchErrors.all(scope.fields, response);
                                             angular.merge(scope.errors, errors.errors);
                                             angular.merge(scope.fields, errors.fieldErrors);
@@ -102,7 +94,6 @@
                 templateUrl: 'templates/user_management/password/change_form.html',
                 link: function (scope, element, attrs) {
                     scope.data = {};
-                    scope.errors = {};
 
                     // If there is a URL fragment named `token` in the current route then
                     // we shall assume we are changing a forgotten password.
@@ -171,13 +162,6 @@
                                             angular.merge(scope.errors, errors.errors);
                                             angular.merge(scope.fields, errors.fieldErrors);
 
-                                           // angular.forEach(response.data, function (error, field) {
-                                           //     error = angular.isArray(error) ? error[0] : error;
-                                           //     if (angular.isDefined(scope.fields[field])) {
-                                           //         scope.fields[field].errors = error;
-                                           //     }
-                                           //     scope.errors[field] = error;
-                                           // });
                                         })
                                         ['finally'](function () {
                                             scope.loading = false;
