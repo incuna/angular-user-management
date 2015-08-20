@@ -8,14 +8,14 @@
             this.all = function (response, fields) {
                 var fieldErrors = {};
                 if (angular.isDefined(fields)) {
-                    fieldErrors.fields = angular.copy(fields);
+                    fieldErrors = angular.copy(fields);
                 }
                 var nonFieldErrors = {};
 
                 angular.forEach(response.data, function (error, field) {
                     error = angular.isArray(error) ? error[0] : error;
-                    if (angular.isDefined(fields[field])) {
-                        fieldErrors.fields[field].nonFieldErrors = error;
+                    if (angular.isDefined(fields) && angular.isDefined(fields[field])) {
+                        fieldErrors[field].errors = error;
                     }
                     nonFieldErrors[field] = error;
                 });
