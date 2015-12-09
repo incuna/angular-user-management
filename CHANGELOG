@@ -1,6 +1,6 @@
 # upcoming
 
-* Moved the profile deletion function to a service and renamed to account deletion.
+* Moved the profile deletion function to a service.
 
 # 1.7.0
 
