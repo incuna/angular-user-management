@@ -75,37 +75,16 @@
         }
     ]);
 
-    module.directive('profileDelete', [
-        'profileFactory', '$modal', '$location', '$filter',
-        function (profileFactory, $modal, $location, $filter) {
+    module.directive('accountDelete', [
+        'AccountFactory',
+        function (AccountFactory) {
             return {
                 restrict: 'A',
                 scope: true,
-
-                link: function (scope, element, attrs) {
-
-                    scope.deleteProfile = function () {
-                        $modal.open({
-                            templateUrl: 'templates/user_management/profile/delete-profile.html',
-                            windowClass: 'delete-profile',
-                            controller: ['$scope', '$modalInstance', function ($scope, $modalInstance) {
-                                $scope.failed = false;
-
-                                $scope.close = function () {
-                                    $modalInstance.dismiss('close');
-                                };
-                                $scope.deleteProfile = function () {
-                                    profileFactory.profile.deleteData().then(function () {
-                                        $modalInstance.dismiss('close');
-                                        $location.path($filter('reverseUrl')('ProfileDeletedCtrl').substring(1));
-                                    },
-                                    function () {
-                                        $scope.failed = true;
-                                    });
-                                };
-                            }]
-                        });
-                    };
+                link: function (scope) {
+                    scope.deleteAccount = function () {
+                        AccountFactory.accountOperations.deleteAccount()
+                    }
                 }
             };
         }
