@@ -13,7 +13,7 @@
                     anonymous: false
                 })
                 .when('/delete-account-confirmation/', {
-                    templateUrl: 'templates/user_management/accounte/delete-account-confirmation.html',
+                    templateUrl: 'templates/user_management/account/delete-account-confirmation.html',
                     controller: 'AccountDeletedCtrl'
                 });
         }

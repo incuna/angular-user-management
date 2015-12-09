@@ -7,7 +7,7 @@ angular.module('user_management.profile').run(['$templateCache', function($templ
 
 
   $templateCache.put('templates/user_management/account/delete-account.html',
-    "<div class=notification-header><span ng-show=!failed translate>You are about to permanently delete your account and all associated data. This cannot be undone. Please confirm you would like to proceed.</span> <span ng-show=failed translate>Delete failed, please try again later.</span></div><div class=actions><button ng-click=deleteProfile() class=\"action button right-arrow seperated tick\" translate>Delete</button> <button ng-click=close() class=\"action button right-arrow seperated cancel\" translate>Cancel</button></div>"
+    "<div class=notification-header><span ng-show=!failed translate>You are about to permanently delete your account and all associated data. This cannot be undone. Please confirm you would like to proceed.</span> <span ng-show=failed translate>Delete failed, please try again later.</span></div><div class=actions><button ng-click=deleteAccount() class=\"action button right-arrow seperated tick\" translate>Delete</button> <button ng-click=close() class=\"action button right-arrow seperated cancel\" translate>Cancel</button></div>"
   );
 
 

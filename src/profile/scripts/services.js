@@ -62,7 +62,7 @@
                             $scope.close = function () {
                                 $modalInstance.dismiss('close');
                             };
-                            $scope.deleteProfile = function () {
+                            $scope.deleteAccount = function () {
                                 profileFactory.profile.deleteData().then(function () {
                                     $modalInstance.dismiss('close');
                                     $location.path($filter('reverseUrl')('AccountDeletedCtrl').substring(1));
