@@ -12,9 +12,9 @@
                     controller: 'ProfileCtrl',
                     anonymous: false
                 })
-                .when('/delete-account-confirmation/', {
-                    templateUrl: 'templates/user_management/account/delete-account-confirmation.html',
-                    controller: 'AccountDeletedCtrl'
+                .when('/delete-profile-confirmation/', {
+                    templateUrl: 'templates/user_management/profile/delete-profile-confirmation.html',
+                    controller: 'ProfileDeletedCtrl'
                 });
         }
     ]);

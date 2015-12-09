@@ -75,14 +75,15 @@
         }
     ]);
 
-    module.directive('accountDelete', [
+    module.directive('profileDelete', [
         'AccountFactory',
         function (AccountFactory) {
             return {
                 restrict: 'A',
                 scope: true,
                 link: function (scope) {
-                    scope.deleteAccount = function () {
+
+                    scope.deleteProfile = function () {
                         AccountFactory.accountOperations.deleteAccount()
                     }
                 }

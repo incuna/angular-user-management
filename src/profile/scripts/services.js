@@ -54,18 +54,18 @@
             var accountOperations = {
                 deleteAccount: function() {
                     $modal.open({
-                        templateUrl: 'templates/user_management/account/delete-account.html',
-                        windowClass: 'delete-account',
+                        templateUrl: 'templates/user_management/profile/delete-profile.html',
+                        windowClass: 'delete-profile',
                         controller: ['$scope', '$modalInstance', function ($scope, $modalInstance) {
                             $scope.failed = false;
 
                             $scope.close = function () {
                                 $modalInstance.dismiss('close');
                             };
-                            $scope.deleteAccount = function () {
+                            $scope.deleteProfile = function () {
                                 profileFactory.profile.deleteData().then(function () {
                                     $modalInstance.dismiss('close');
-                                    $location.path($filter('reverseUrl')('AccountDeletedCtrl').substring(1));
+                                    $location.path($filter('reverseUrl')('ProfileDeletedCtrl').substring(1));
                                 },
                                 function () {
                                     $scope.failed = true;
