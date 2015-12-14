@@ -44,6 +44,44 @@
         }
     ]);
 
+    module.factory('AccountFactory', [
+        'profileFactory', 
+        '$modal', 
+        '$location', 
+        '$filter',
+        function (profileFactory, $modal, $location, $filter) {
+
+            var accountOperations = {
+                deleteAccount: function() {
+                    $modal.open({
+                        templateUrl: 'templates/user_management/profile/delete-profile.html',
+                        windowClass: 'delete-profile',
+                        controller: ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+                            $scope.failed = false;
+
+                            $scope.close = function () {
+                                $modalInstance.dismiss('close');
+                            };
+                            $scope.deleteProfile = function () {
+                                profileFactory.profile.deleteData().then(function () {
+                                    $modalInstance.dismiss('close');
+                                    $location.path($filter('reverseUrl')('ProfileDeletedCtrl').substring(1));
+                                },
+                                function () {
+                                    $scope.failed = true;
+                                });
+                            };
+                        }]
+                    });
+                }
+            }
+
+            return {
+                accountOperations: accountOperations
+            };
+        }
+    ]);
+
 }(window.angular));
 
 

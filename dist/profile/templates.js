@@ -2,7 +2,7 @@ angular.module('user_management.profile').run(['$templateCache', function($templ
   'use strict';
 
   $templateCache.put('templates/user_management/profile/delete-profile-confirmation.html',
-    "<div data-extend-template=templates/base.html class=profile-page><div data-block=page-body-content-inner><span translate>Your account has been deleted.</span> <a class=\"btn btn-default\" ng-href=\"/\" translate>Home</a></div></div>"
+    "<div data-extend-template=templates/base.html class=profile-page><div data-block=page-body-content-inner><span translate>Your account has been deleted.</span> <a class=\"btn btn-default\" href=\"#/\" translate>Home</a></div></div>"
   );
 
 
