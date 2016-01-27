@@ -46,25 +46,25 @@
 
     module.factory('AccountFactory', [
         'profileFactory', 
-        '$modal', 
+        '$uibModal', 
         '$location', 
         '$filter',
-        function (profileFactory, $modal, $location, $filter) {
+        function (profileFactory, $uibModal, $location, $filter) {
 
             var accountOperations = {
                 deleteAccount: function() {
-                    $modal.open({
+                    $uibModal.open({
                         templateUrl: 'templates/user_management/profile/delete-profile.html',
                         windowClass: 'delete-profile',
-                        controller: ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+                        controller: ['$scope', '$uibModalInstance', function ($scope, $uibModalInstance) {
                             $scope.failed = false;
 
                             $scope.close = function () {
-                                $modalInstance.dismiss('close');
+                                $uibModalInstance.dismiss('close');
                             };
                             $scope.deleteProfile = function () {
                                 profileFactory.profile.deleteData().then(function () {
-                                    $modalInstance.dismiss('close');
+                                    $uibModalInstance.dismiss('close');
                                     $location.path($filter('reverseUrl')('ProfileDeletedCtrl').substring(1));
                                 },
                                 function () {
