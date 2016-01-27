@@ -1,8 +1,8 @@
 # upcoming
 
 * BREAKING CHANGE
-    * Adding bootstap as a dependency.
-    * Also Updating Angular
+    * Adding bootstap 1.1.0 as a dependency.
+    * Also Updating Angular and Angular route to version 1.4.
 
 # 1.8.0
 
