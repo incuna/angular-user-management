@@ -14,8 +14,8 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4",
-    "angular-route": "~1.4",
-    "angular-bootstrap": "1.1.0"
+    "angular": "1.4 - 1.5",
+    "angular-route": "1.4 - 1.5",
+    "angular-bootstrap": "1.1.x"
   }
 }
