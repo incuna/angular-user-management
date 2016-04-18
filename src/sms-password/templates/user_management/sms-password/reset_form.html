@@ -4,6 +4,7 @@
 
 <div class="alert alert-success" ng-show="changed">
     <p translate>You've successfully changed your password.</p>
+    <p translate>Please <a href="{{ 'HomeCtrl'|reverseUrl }}">log in</a> here</p>
 </div>
 
 <div class="form-group" ng-class="{'has-error': errors.phone_number}">
