@@ -1,3 +1,7 @@
+# UPCOMING
+
+* Display login link on sms verification/password reset success.
+
 # 2.1.0
 
 * Upgrade Angular compatibility to include 1.5.
