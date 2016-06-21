@@ -4,10 +4,16 @@ var fs = require('fs');
 var _ = require('lodash');
 
 module.exports = function (grunt) {
-    grunt.loadNpmTasks('grunt-angular-templates');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+
+    require('time-grunt')(grunt);
+
+    if (grunt.option('help')) {
+        require('load-grunt-tasks')(grunt);
+    } else {
+        require('jit-grunt')(grunt, {
+            ngtemplates: 'grunt-angular-templates'
+        });
+    }
 
     // Get a list of modules
     var modules = fs.readdirSync('src').filter(function (file) {
