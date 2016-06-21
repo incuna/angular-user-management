@@ -28,3 +28,11 @@ It's planned to deprecate this method of configuring settings, moving towards a 
 # i18n
 
 All strings are marked as translatable using [angular-gettext](https://github.com/rubenv/angular-gettext) syntax.
+
+# Tests
+
+- `grunt test`
+
+When working on tests, make sure the dist is up-to-date:
+- `grunt dist`
+- `grunt karma:dev` will watch dist and test files and run again when they change (helpful)
