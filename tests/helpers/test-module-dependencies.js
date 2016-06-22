@@ -30,11 +30,6 @@
                 }.bind(this)).not.toThrow();
             });
 
-            it('should have routes', function () {
-                this.runModule();
-                expect(Object.keys(this.$route.routes)).not.toEqual([]);
-            });
-
         });
 
     };
