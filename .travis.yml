@@ -1,0 +1,21 @@
+language: node_js
+
+node_js:
+    - 0.10
+    - 0.12
+    - 4
+    - 5
+    - 6
+
+notifications:
+    email: false
+
+cache:
+  directories:
+    - $(npm config get cache)
+
+before_script:
+    - 'export DISPLAY=:99.0'
+    - 'sh -e /etc/init.d/xvfb start'
+
+# See default Travis install and script commands for node_js language.
