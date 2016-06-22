@@ -1,35 +1,70 @@
 'use strict';
 
+var _ = require('lodash');
+
 module.exports = function (grunt) {
+
+    var moduleNames = [
+        'password',
+        'profile',
+        'registration',
+        'sms-password',
+        'sms-verification',
+        'verification'
+    ];
+
+    var setupFiles = [
+        '<%= config.lib %>/angular/angular.js',
+        '<%= config.lib %>/angular-mocks/angular-mocks.js',
+        '<%= config.lib %>/angular-route/angular-route.js',
+        '<%= config.lib %>/angular-bootstrap/ui-bootstrap-tpls.js',
+
+        '<%= config.files.karmaHelpers %>',
+        '<%= config.files.karmaMocks %>'
+    ];
+    var allTestFiles = [
+        '<%= config.files.karmaTests %>'
+    ];
+
+    var makeGruntKarmaFiles = function (moduleFiles, specificTestFiles) {
+        var arrayOfSrcFiles = [].concat(setupFiles, moduleFiles, specificTestFiles || allTestFiles);
+        return [
+            {
+                src: arrayOfSrcFiles
+            }
+        ];
+    };
+
+    var ciOptions = {
+        singleRun: true,
+        reporters: ['dots', 'coverage'],
+        browsers: ['Firefox'],
+        logLevel: 'DEBUG'
+    };
+
+    var allModuleFiles = [];
+    var individualModuleTargets = {};
+    moduleNames.forEach(function (moduleName) {
+        var individualModuleFiles = [
+            '<%= config.dist %>/' + moduleName + '/' + moduleName + '.js',
+            '<%= config.dist %>/' + moduleName + '/templates.js'
+        ];
+        var individualTestFiles = [
+            '<%= config.tests %>/unit/' + moduleName + '/**/*.js'
+        ];
+        allModuleFiles = allModuleFiles.concat(individualModuleFiles);
+        individualModuleTargets[moduleName] = {
+            options: ciOptions,
+            files: makeGruntKarmaFiles(individualModuleFiles, individualTestFiles)
+        };
+    });
+
+    var allKarmaFiles = makeGruntKarmaFiles(allModuleFiles);
 
     grunt.config.merge({
         karma: {
             options: {
                 basePath: '',
-                files: [
-                    '<%= config.lib %>/angular/angular.js',
-                    '<%= config.lib %>/angular-mocks/angular-mocks.js',
-                    '<%= config.lib %>/angular-route/angular-route.js',
-                    '<%= config.lib %>/angular-bootstrap/ui-bootstrap-tpls.js',
-
-                    '<%= config.files.karmaMocks %>',
-
-                    // Keep this order to closely match what apps would source.
-                    '<%= config.dist %>/password/password.js',
-                    '<%= config.dist %>/password/templates.js',
-                    '<%= config.dist %>/profile/profile.js',
-                    '<%= config.dist %>/profile/templates.js',
-                    '<%= config.dist %>/registration/registration.js',
-                    '<%= config.dist %>/registration/templates.js',
-                    '<%= config.dist %>/sms-password/sms-password.js',
-                    '<%= config.dist %>/sms-password/templates.js',
-                    '<%= config.dist %>/sms-verification/sms-verification.js',
-                    '<%= config.dist %>/sms-verification/templates.js',
-                    '<%= config.dist %>/verification/verification.js',
-                    '<%= config.dist %>/verification/templates.js',
-
-                    '<%= config.files.karmaTests %>'
-                ],
                 exclude: [
                 ],
                 frameworks: ['jasmine'],
@@ -46,19 +81,32 @@ module.exports = function (grunt) {
                 port: 9876,
                 colors: true,
                 browsers: ['Chrome', 'Firefox'],
-                logLevel: 'DEBUG'
+                logLevel: 'INFO'
             },
             dev: {
-                browsers: ['Chrome'],
-                logLevel: 'INFO',
-                autoWatch: true
+                options: {
+                    browsers: ['Chrome'],
+                    autoWatch: true
+                },
+                files: allKarmaFiles
             },
             ci: {
-                singleRun: true,
-                reporters: ['dots', 'coverage'],
-                browsers: ['Firefox']
+                options: ciOptions,
+                files: allKarmaFiles
             }
         }
+    });
+
+    grunt.config.merge({
+        karma: individualModuleTargets
+    });
+
+    grunt.registerTask('test-module-isolation', function () {
+        var targets = _.keys(individualModuleTargets);
+        var tasks = _.map(targets, function (target) {
+            return 'karma:' + target;
+        });
+        grunt.task.run(tasks);
     });
 
 };

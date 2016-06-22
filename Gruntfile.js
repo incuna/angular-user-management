@@ -65,6 +65,7 @@ module.exports = function (grunt) {
             lib: 'bower_components',
             tests: 'tests',
             files: {
+                karmaHelpers: '<%= config.tests %>/helpers/**/*.js',
                 karmaMocks: '<%= config.tests %>/mocks/**/*.js',
                 karmaTests: '<%= config.tests %>/unit/**/*.js',
                 distScripts: '<%= config.dist %>/**/*.js',
@@ -121,6 +122,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('test', [
         'dist',
+        'test-module-isolation',
         'karma:ci'
     ]);
 

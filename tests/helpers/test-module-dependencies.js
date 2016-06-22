@@ -3,19 +3,13 @@
 
 (function () {
 
-    'use strict';
+    var helpers = window._helpers = window._helpers || {};
 
-    var moduleNames = [
-        'password',
-        'profile',
-        'registration',
-        'sms-password',
-        'sms-verification',
-        'verification'
-    ];
+    helpers.testModuleDependencies = function (moduleName) {
 
-    moduleNames.forEach(function (moduleName) {
-        describe(moduleName, function () {
+        'use strict';
+
+        describe(moduleName + ' dependencies', function () {
 
             beforeEach(function () {
 
@@ -42,6 +36,7 @@
             });
 
         });
-    });
+
+    };
 
 }());
