@@ -1,4 +1,4 @@
-# Upcoming
+### 2.1.2
 
 * Fix sms-verification assigning components to modules other than itself
 
