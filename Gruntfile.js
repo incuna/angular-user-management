@@ -4,10 +4,18 @@ var fs = require('fs');
 var _ = require('lodash');
 
 module.exports = function (grunt) {
-    grunt.loadNpmTasks('grunt-angular-templates');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-watch');
+
+    grunt.initConfig({});
+
+    require('time-grunt')(grunt);
+
+    if (grunt.option('help')) {
+        require('load-grunt-tasks')(grunt);
+    } else {
+        require('jit-grunt')(grunt, {
+            ngtemplates: 'grunt-angular-templates'
+        });
+    }
 
     // Get a list of modules
     var modules = fs.readdirSync('src').filter(function (file) {
@@ -49,8 +57,20 @@ module.exports = function (grunt) {
         };
     });
 
-    grunt.initConfig({
+    grunt.config.merge({
+        // Configurable paths
         config: {
+            modules: 'src',
+            dist: 'dist',
+            lib: 'bower_components',
+            tests: 'tests',
+            files: {
+                karmaHelpers: '<%= config.tests %>/helpers/**/*.js',
+                karmaMocks: '<%= config.tests %>/mocks/**/*.js',
+                karmaTests: '<%= config.tests %>/unit/**/*.js',
+                distScripts: '<%= config.dist %>/**/*.js',
+                distScriptsNoTemplates: '<%= config.dist %>/**/!(templates).js'
+            },
             htmlmin: {
                 collapseBooleanAttributes: true,
                 collapseWhitespace: true,
@@ -69,7 +89,7 @@ module.exports = function (grunt) {
             },
             js: {
                 files: 'src/**/scripts/**/*.js',
-                tasks: 'dist-js'
+                tasks: 'dist'
             }
         },
         ngtemplates: _.extend({
@@ -87,14 +107,23 @@ module.exports = function (grunt) {
         }, uglifyConfig)
     });
 
-    grunt.registerTask('dist-js', [
+    grunt.loadTasks('./grunt');
+
+    grunt.registerTask('dist', [
         'concat',
-        'uglify'
+        'uglify',
+        'ngtemplates'
     ]);
 
     grunt.registerTask('default', [
-        'dist-js',
-        'ngtemplates'
+        'dist',
+        'watch'
+    ]);
+
+    grunt.registerTask('test', [
+        'dist',
+        'test-module-isolation',
+        'karma:ci'
     ]);
 
 };

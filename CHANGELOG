@@ -1,3 +1,7 @@
+# Upcoming
+
+* Fix sms-verification assigning components to modules other than itself
+
 # 2.1.1
 
 * Display login link on sms verification/password reset success.
