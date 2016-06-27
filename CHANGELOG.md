@@ -1,3 +1,8 @@
+## Upcoming
+
+* Add file linting using eslint version 18.1.0. https://github.com/sindresorhus/grunt-eslint.
+* Add grunt jscs version 1.2.0.
+
 ### 2.1.2
 
 * Fix sms-verification assigning components to modules other than itself

@@ -26,7 +26,7 @@
                         scope.errorData = undefined;
 
                         // Clear all errors on the fields object.
-                        angular.forEach(scope.fields, function(value, key){
+                        angular.forEach(scope.fields, function (value, key) {
                             value.errors = '';
                         });
                         scope.errors = {};
@@ -88,5 +88,3 @@
     ]);
 
 }(window.angular));
-
-

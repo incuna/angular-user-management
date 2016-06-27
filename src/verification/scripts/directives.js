@@ -23,7 +23,7 @@
                             scope.status = response.status;
 
                             if (response.status === 400 && response.data.detail === 'Invalid or expired token.') {
-                               scope.invalid = true;
+                                scope.invalid = true;
                             }
                         })
                         ['finally'](function () {
@@ -59,5 +59,3 @@
     ]);
 
 }(window.angular));
-
-

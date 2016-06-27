@@ -65,6 +65,13 @@ module.exports = function (grunt) {
             lib: 'bower_components',
             tests: 'tests',
             files: {
+                lint: [
+                    'src/**/*.js',
+                    '<%= config.files.karmaMocks %>',
+                    '<%= config.files.karmaTests %>',
+                    './grunt/**/*.js',
+                    'Gruntfile.js'
+                ],
                 karmaHelpers: '<%= config.tests %>/helpers/**/*.js',
                 karmaMocks: '<%= config.tests %>/mocks/**/*.js',
                 karmaTests: '<%= config.tests %>/unit/**/*.js',
@@ -82,6 +89,20 @@ module.exports = function (grunt) {
                 useShortDoctype: true
             }
         },
+        eslint: {
+            all: {
+                options: {
+                    config: 'eslint.json'
+                },
+                src: '<%= config.files.lint %>'
+            }
+        },
+        jscs: {
+            options: {
+                config: '.jscsrc'
+            },
+            src: '<%= config.files.lint %>'
+        },
         watch: {
             templates: {
                 files: 'src/**/templates/**/*.html',
@@ -94,14 +115,16 @@ module.exports = function (grunt) {
         },
         ngtemplates: _.extend({
             options: {
-                htmlmin: '<%= config.htmlmin %>',
+                htmlmin: '<%= config.htmlmin %>'
             }
         }, ngtemplatesConfig),
         concat: _.extend({}, concatConfig),
         uglify: _.extend({
             options: {
                 compress: {
+                    // jscs:disable requireCamelCaseOrUpperCaseIdentifiers
                     drop_console: true
+                    // jscs:enable requireCamelCaseOrUpperCaseIdentifiers
                 }
             }
         }, uglifyConfig)
@@ -120,7 +143,13 @@ module.exports = function (grunt) {
         'watch'
     ]);
 
+    grunt.registerTask('lint', 'Run the JS linters.', [
+        'eslint',
+        'jscs'
+    ]);
+
     grunt.registerTask('test', [
+        'lint',
         'dist',
         'test-module-isolation',
         'karma:ci'

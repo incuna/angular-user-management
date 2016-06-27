@@ -14,14 +14,18 @@
                     return $http({
                         method: 'POST',
                         url: apiRoot + userManagementVerificationConfig.verificationEndpoint() + '/' + token,
-                        data: {token: token}
+                        data: {
+                            token: token
+                        }
                     });
                 },
                 resend: function (email) {
                     return $http({
                         method: 'POST',
                         url: apiRoot + userManagementVerificationConfig.verificationResendEndpoint(),
-                        data: {email: email}
+                        data: {
+                            email: email
+                        }
                     });
                 }
             };
@@ -33,5 +37,3 @@
     ]);
 
 }(window.angular));
-
-

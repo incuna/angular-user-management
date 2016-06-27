@@ -7,4 +7,3 @@
     module.controller('ProfileDeletedCtrl', [function () {}]);
 
 }(window.angular));
-
