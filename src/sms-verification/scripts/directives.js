@@ -16,7 +16,7 @@
                     onResend: '&'
                 },
                 templateUrl: 'templates/user_management/sms-verification/verify_form.html',
-                link: function (scope, element, attrs) {
+                link: function (scope) {
                     scope.verify = function () {
                         scope.verified = false;
                         scope.resent = false;
@@ -61,4 +61,4 @@
         }
     ]);
 
-})(window.angular)
+}(window.angular));

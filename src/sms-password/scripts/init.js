@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
 
-    var module = angular.module('user_management.sms-password', [
+    angular.module('user_management.sms-password', [
         'ngRoute'
     ]);
 

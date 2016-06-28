@@ -10,7 +10,7 @@
                 restrict: 'A',
                 scope: true,
                 templateUrl: 'templates/user_management/profile/profile_form.html',
-                link: function (scope, element, attrs) {
+                link: function (scope) {
                     scope.data = {};
 
                     profileFactory.profile.get()
@@ -37,7 +37,7 @@
                                     scope.errorData = undefined;
 
                                     // Clear all errors on the fields object.
-                                    angular.forEach(scope.fields, function (value, key) {
+                                    angular.forEach(scope.fields, function (value) {
                                         value.errors = '';
                                     });
                                     scope.errors = {};
