@@ -11,9 +11,12 @@
         "no-use-before-define": error,
         "new-cap": error,
         "no-caller": error,
-        "jsx-quotes": error,
         "strict": error,
         "no-unused-vars": warn,
-        "quotes": ["error", "single"]
+        "quotes": [
+            "error",
+            "single",
+            {"avoidEscape": true}
+        ]
     }
 }
