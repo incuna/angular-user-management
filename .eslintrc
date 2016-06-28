@@ -1,19 +1,19 @@
 {
-    "browser": true,
-    "camelcase": true,
-    "curly": true,
-    "eqeqeq": true,
-    "es3": true,
-    "immed": true,
-    "indent": 4,
-    "latedef": "nofunc",
-    "newcap": true,
-    "noarg": true,
-    "quotmark": true,
-    "strict": true,
-    "sub": true,
-    "trailing": true,
-    "undef": "vars",
-    "unused": "vars",
-    "white": true
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        "eqeqeq": "error",
+        "camelcase": error,
+        "curly": error,
+        "no-trailing-spaces": error,
+        "wrap-iife": error,
+        "no-use-before-define": error,
+        "new-cap": error,
+        "no-caller": error,
+        "jsx-quotes": error,
+        "strict": error,
+        "no-unused-vars": warn,
+        "quotes": ["error", "single"]
+    }
 }
