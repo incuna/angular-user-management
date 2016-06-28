@@ -92,7 +92,7 @@ module.exports = function (grunt) {
         eslint: {
             all: {
                 options: {
-                    config: 'eslint.json'
+                    config: '.eslintrc'
                 },
                 src: '<%= config.files.lint %>'
             }
