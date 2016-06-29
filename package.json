@@ -1,6 +1,6 @@
 {
   "name": "angular-user-management",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "dependencies": {},
   "devDependencies": {
     "bower": "1.7.9",

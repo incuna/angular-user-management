@@ -1,4 +1,4 @@
-## Upcoming
+### 2.1.3
 
 * Add file linting using eslint version 18.1.0. https://github.com/sindresorhus/grunt-eslint.
 * Add grunt jscs version 1.2.0.
