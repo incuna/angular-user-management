@@ -37,8 +37,8 @@
             },
             setUpdateEndpoint: function (value) {
                 updateEndpoint = value;
-            },
-        };
+            }
+        }
     });
 
 }(window.angular));

@@ -12,7 +12,7 @@
                     data: '=?'
                 },
                 templateUrl: 'templates/user_management/sms-password/reset_form.html',
-                link: function (scope, element, attrs) {
+                link: function (scope) {
                     var beforeRequest = function () {
                         scope.loading = true;
                         scope.changed = false;
@@ -26,7 +26,7 @@
                         scope.errorData = undefined;
 
                         // Clear all errors on the fields object.
-                        angular.forEach(scope.fields, function(value, key){
+                        angular.forEach(scope.fields, function (value) {
                             value.errors = '';
                         });
                         scope.errors = {};
@@ -88,5 +88,3 @@
     ]);
 
 }(window.angular));
-
-

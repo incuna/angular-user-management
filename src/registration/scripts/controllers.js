@@ -6,4 +6,3 @@
     module.controller('RegistrationCtrl', [function () {}]);
 
 }(window.angular));
-

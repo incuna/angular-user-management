@@ -1,3 +1,5 @@
+/* eslint strict: off */
+
 'use strict';
 
 var _ = require('lodash');

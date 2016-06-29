@@ -8,4 +8,3 @@
     module.controller('VerificationCtrl', [function () {}]);
 
 }(window.angular));
-

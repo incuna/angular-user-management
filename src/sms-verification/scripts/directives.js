@@ -16,7 +16,7 @@
                     onResend: '&'
                 },
                 templateUrl: 'templates/user_management/sms-verification/verify_form.html',
-                link: function (scope, element, attrs) {
+                link: function (scope) {
                     scope.verify = function () {
                         scope.verified = false;
                         scope.resent = false;
@@ -26,7 +26,9 @@
                                 scope.status = response.status;
                                 scope.verified = true;
                                 if (angular.isDefined(scope.onVerify)) {
-                                    scope.onVerify({verifyData: angular.copy(scope.data)});
+                                    scope.onVerify({
+                                        verifyData: angular.copy(scope.data)
+                                    });
                                 }
                             })
                             .catch(function (response) {
@@ -44,7 +46,9 @@
                                 scope.resent = true;
                                 scope.status = response.status;
                                 if (angular.isDefined(scope.onResend)) {
-                                    scope.onResend({resendData: angular.copy(scope.data)});
+                                    scope.onResend({
+                                        resendData: angular.copy(scope.data)
+                                    });
                                 }
                             })
                             .catch(function (response) {
@@ -57,4 +61,4 @@
         }
     ]);
 
-})(window.angular)
+}(window.angular));

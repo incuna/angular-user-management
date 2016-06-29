@@ -11,7 +11,7 @@
                 restrict: 'A',
                 scope: true,
                 templateUrl: 'templates/user_management/verification/verify.html',
-                link: function (scope, element, attrs) {
+                link: function (scope) {
                     var TOKEN = $route.current.pathParams.token;
 
                     scope.loading = true;
@@ -23,7 +23,7 @@
                             scope.status = response.status;
 
                             if (response.status === 400 && response.data.detail === 'Invalid or expired token.') {
-                               scope.invalid = true;
+                                scope.invalid = true;
                             }
                         })
                         ['finally'](function () {
@@ -41,7 +41,7 @@
                 restrict: 'A',
                 scope: true,
                 templateUrl: 'templates/user_management/verification/verification_resend_form.html',
-                link: function (scope, element, attrs) {
+                link: function (scope) {
                     scope.data = {};
 
                     scope.resend = function () {
@@ -59,5 +59,3 @@
     ]);
 
 }(window.angular));
-
-

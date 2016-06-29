@@ -35,4 +35,3 @@
     });
 
 }(window.angular));
-

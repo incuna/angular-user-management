@@ -8,5 +8,3 @@
     module.controller('PasswordChangeCtrl', [function () {}]);
 
 }(window.angular));
-
-

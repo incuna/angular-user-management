@@ -23,7 +23,7 @@
                         url: profile.url
                     });
                 },
-                deleteData: function(){
+                deleteData: function () {
                     return $http({
                         method: 'DELETE',
                         url: profile.url
@@ -45,14 +45,14 @@
     ]);
 
     module.factory('AccountFactory', [
-        'profileFactory', 
-        '$uibModal', 
-        '$location', 
+        'profileFactory',
+        '$uibModal',
+        '$location',
         '$filter',
         function (profileFactory, $uibModal, $location, $filter) {
 
             var accountOperations = {
-                deleteAccount: function() {
+                deleteAccount: function () {
                     $uibModal.open({
                         templateUrl: 'templates/user_management/profile/delete-profile.html',
                         windowClass: 'delete-profile',
@@ -83,5 +83,3 @@
     ]);
 
 }(window.angular));
-
-

@@ -19,7 +19,7 @@
                     if (angular.isDefined(attrs.onRegister)) {
                         var parentGet = $parse(attrs.onRegister);
                         if (parentGet !== angular.noop) {
-                            scope.onRegister = function(locals) {
+                            scope.onRegister = function (locals) {
                                 return parentGet(scope.$parent, locals);
                             };
                         }
@@ -42,17 +42,19 @@
                                     scope.errorData = undefined;
 
                                     // Clear all errors on the fields object.
-                                    angular.forEach(scope.fields, function(value, key){
+                                    angular.forEach(scope.fields, function (value) {
                                         value.errors = '';
                                     });
                                     scope.errors = {};
 
                                     registrationFactory
                                         .register.post(scope.data)
-                                        .then(function (response) {
+                                        .then(function () {
                                             scope.registered = true;
                                             if (angular.isDefined(scope.onRegister)) {
-                                                scope.onRegister({user: angular.copy(scope.data)});
+                                                scope.onRegister({
+                                                    user: angular.copy(scope.data)
+                                                });
                                             }
                                             scope.data = {};
                                         }, function (response) {

@@ -1,0 +1,22 @@
+{
+    "env": {
+        "browser": true
+    },
+    "rules": {
+        "eqeqeq": "error",
+        "camelcase": error,
+        "curly": error,
+        "no-trailing-spaces": error,
+        "wrap-iife": error,
+        "no-use-before-define": error,
+        "new-cap": error,
+        "no-caller": error,
+        "strict": error,
+        "no-unused-vars": warn,
+        "quotes": [
+            "error",
+            "single",
+            {"avoidEscape": true}
+        ]
+    }
+}

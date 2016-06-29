@@ -10,7 +10,7 @@
                 restrict: 'A',
                 scope: true,
                 templateUrl: 'templates/user_management/password/reset_request_form.html',
-                link: function (scope, element, attrs) {
+                link: function (scope) {
                     scope.data = {};
 
                     var optionsPromise = passwordFactory.resetRequest.options();
@@ -30,7 +30,7 @@
                                     scope.errorData = undefined;
 
                                     // Clear all errors on the fields object.
-                                    angular.forEach(scope.fields, function(value, key){
+                                    angular.forEach(scope.fields, function (value) {
                                         value.errors = '';
                                     });
                                     scope.errors = {};
@@ -71,7 +71,7 @@
                 restrict: 'A',
                 scope: true,
                 templateUrl: 'templates/user_management/password/change_form.html',
-                link: function (scope, element, attrs) {
+                link: function (scope) {
                     scope.data = {};
 
                     // If there is a URL fragment named `token` in the current route then
@@ -109,7 +109,7 @@
                                     scope.errorData = undefined;
 
                                     // Clear all errors on the fields object.
-                                    angular.forEach(scope.fields, function(value, key){
+                                    angular.forEach(scope.fields, function (value) {
                                         value.errors = '';
                                     });
                                     scope.errors = {};
@@ -156,4 +156,3 @@
     ]);
 
 }(window.angular));
-

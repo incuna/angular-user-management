@@ -1,4 +1,4 @@
-/* jshint es3: false, esnext: true */
+/* eslint no-unused-vars: off */
 /* global jasmine, beforeEach, describe, it, expect, module, inject */
 
 (function () {
