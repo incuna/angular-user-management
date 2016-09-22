@@ -1,3 +1,7 @@
+### UPCOMING
+
+* Show `tokenError` for any options errors (not just a 404).
+
 ### 2.1.3
 
 * Add file linting using eslint version 18.1.0. https://github.com/sindresorhus/grunt-eslint.

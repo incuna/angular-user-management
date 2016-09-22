@@ -91,7 +91,7 @@
                             scope.fields = response.data.actions.PUT;
                         }, function (response) {
                             // If the response returns a 404 and we have a token.
-                            if (response.status === 404 && angular.isDefined(TOKEN)) {
+                            if (angular.isDefined(TOKEN)) {
                                 // There was a problem with the token.
                                 scope.tokenError = true;
                             }
