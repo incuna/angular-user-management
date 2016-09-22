@@ -1,4 +1,4 @@
-### UPCOMING
+### 2.1.4
 
 * Show `tokenError` for any options errors (not just a 404).
 
