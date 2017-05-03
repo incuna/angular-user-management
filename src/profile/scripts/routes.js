@@ -1,7 +1,7 @@
 (function (angular) {
     'use strict';
 
-    var module = angular.module('user_management.profile');
+    var module = angular.module('user_management.profile-routes', ['ngRoute']);
 
     module.config([
         '$routeProvider',
