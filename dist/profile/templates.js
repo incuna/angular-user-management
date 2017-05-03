@@ -12,12 +12,12 @@ angular.module('user_management.profile').run(['$templateCache', function($templ
 
 
   $templateCache.put('templates/user_management/profile/profile.html',
-    "<form profile-form ng-submit=editProfile()></form><form password-change-form ng-submit=changePassword()></form>"
+    "<form profile-form profile-fields=profileFields profile-options=profileOptions></form><form password-change-form ng-submit=changePassword()></form>"
   );
 
 
   $templateCache.put('templates/user_management/profile/profile_form.html',
-    "<div class=\"alert alert-success\" ng-if=\"updated === true\"><p translate>You have updated your profile.</p></div><div class=form-group ng-class=\"{'has-error': errors.name}\"><label for=name ng-if=fields.name.label>{{ fields.name.label }}</label><input type=text ng-model=data.name class=form-control id=name maxlength=\"{{ fields.name.max_length }}\"><div class=help-block ng-if=errors.name ng-bind=errors.name></div><div class=help-block ng-if=errors.detail ng-bind=errors.detail></div><div class=help-block ng-if=errors.non_field_errors ng-bind=errors.non_field_errors></div></div><button type=submit class=\"btn btn-default\" translate>Update profile</button>"
+    "<div class=\"alert alert-success\" ng-if=\"updated === true\"><p translate>You have updated your profile.</p></div><div class=form-group ng-class=\"{'has-error': errors.name}\"><label for=name ng-if=fields.name.label>{{ fields.name.label }}</label><input type=text ng-model=data.name class=form-control id=name maxlength=\"{{ fields.name.max_length }}\"><div class=help-block ng-if=errors.name ng-bind=errors.name></div><div class=help-block ng-if=errors.detail ng-bind=errors.detail></div><div class=help-block ng-if=errors.non_field_errors ng-bind=errors.non_field_errors></div></div><button type=submit class=\"btn btn-default\" ng-click=editProfile() translate>Update profile</button>"
   );
 
 }]);
