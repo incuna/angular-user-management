@@ -1,34 +1,24 @@
 (function (angular) {
     'use strict';
 
-    var module = angular.module('user_management.profile');
+    var module = angular.module('user_management.profile-directives', []);
 
     module.directive('profileForm', [
         'profileFactory',
         function (profileFactory) {
             return {
                 restrict: 'A',
-                scope: true,
+                scope: {
+                    profileOptions: '=',
+                    profileFields: '='
+                },
                 templateUrl: 'templates/user_management/profile/profile_form.html',
                 link: function (scope) {
-                    scope.data = {};
-
-                    profileFactory.profile.get()
-                        .then(function (response) {
-                            angular.extend(scope.data, response.data);
-                        });
-
-                    var optionsPromise = profileFactory.profile.options();
-                    optionsPromise
-                        .then(function (response) {
-                            scope.fields = response.data.actions.PUT;
-                        });
-
                     scope.editProfile = function (scopeObject) {
                         // Use scopeObject (optional) to pass a reference to an object which is used in the page view, eg. to display the user name, so it can be updated without refreshing.
                         //
                         if (!scope.loading) {
-                            optionsPromise
+                            profileFactory.profile.options()
                                 .then(function () {
                                     scope.loading = true;
                                     scope.updated = false;
@@ -37,15 +27,15 @@
                                     scope.errorData = undefined;
 
                                     // Clear all errors on the fields object.
-                                    angular.forEach(scope.fields, function (value) {
+                                    angular.forEach(scope.profileOptions, function (value) {
                                         value.errors = '';
                                     });
                                     scope.errors = {};
 
                                     profileFactory
-                                        .profile.patch(scope.data)
+                                        .profile.patch(scope.profileFields)
                                         .then(function (response) {
-                                            scope.data = response.data;
+                                            scope.profileFields = response.data;
                                             if (angular.isDefined(scopeObject)) {
                                                 angular.forEach(response.data, function (value, key) {
                                                     scopeObject[key] = value;
@@ -58,10 +48,12 @@
 
                                             angular.forEach(response.data, function (error, field) {
                                                 error = angular.isArray(error) ? error[0] : error;
-                                                if (angular.isDefined(scope.fields[field])) {
-                                                    scope.fields[field].errors = error;
+                                                if (angular.isDefined(scope.profileOptions[field])) {
+                                                    scope.profileOptions[field].errors = error;
+                                                    console.log(scope.profileOptions[field].errors)
                                                 }
                                                 scope.errors[field] = error;
+                                                console.log(scope.errors[field])
                                             });
                                         })
                                         ['finally'](function () {
@@ -82,7 +74,6 @@
                 restrict: 'A',
                 scope: true,
                 link: function (scope) {
-
                     scope.deleteProfile = function () {
                         AccountFactory.accountOperations.deleteAccount()
                     }
