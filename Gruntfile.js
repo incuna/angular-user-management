@@ -135,11 +135,17 @@ module.exports = function (grunt) {
 
     grunt.loadTasks('./grunt');
 
-    grunt.registerTask('dist', [
-        'concat',
-        'uglify',
-        'ngtemplates'
-    ]);
+    grunt.registerTask('dist', function (target) {
+        var targetSuffix = '';
+        if (target) {
+            targetSuffix = ':' + target;
+        }
+        grunt.task.run([
+            'concat' + targetSuffix,
+            'uglify' + targetSuffix,
+            'ngtemplates' + targetSuffix
+        ]);
+    });
 
     grunt.registerTask('default', [
         'dist',
