@@ -46,7 +46,7 @@
                     beforeRequest();
                     smsPasswordFactory.change.options()
                         .then(function (response) {
-                            scope.fields = response.data.actions.POST;
+                            scope.fields = response.data.actions && response.data.actions.POST;
                             scope.loading = false;
                         });
 

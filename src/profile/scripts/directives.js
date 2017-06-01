@@ -21,7 +21,7 @@
                     var optionsPromise = profileFactory.profile.options();
                     optionsPromise
                         .then(function (response) {
-                            scope.fields = response.data.actions.PUT;
+                            scope.fields = response.data.actions && response.data.actions.PUT;
                         });
 
                     scope.editProfile = function (scopeObject) {

@@ -16,7 +16,7 @@
                     var optionsPromise = passwordFactory.resetRequest.options();
                     optionsPromise
                         .then(function (response) {
-                            scope.fields = response.data.actions.POST;
+                            scope.fields = response.data.actions && response.data.actions.POST;
                         });
 
                     scope.resetRequest = function () {
@@ -88,7 +88,7 @@
 
                     optionsPromise
                         .then(function (response) {
-                            scope.fields = response.data.actions.PUT;
+                            scope.fields = response.data.actions && response.data.actions.PUT;
                         }, function (response) {
                             // If the response is rejected and we have a token.
                             if (angular.isDefined(TOKEN)) {

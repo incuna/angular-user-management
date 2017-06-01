@@ -87,7 +87,7 @@ module.exports = function (grunt) {
             },
             dev: {
                 options: {
-                    browsers: ['Chrome'],
+                    browsers: ['Firefox'],
                     autoWatch: true
                 },
                 files: allKarmaFiles

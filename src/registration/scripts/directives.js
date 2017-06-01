@@ -28,7 +28,7 @@
                     var optionsPromise = registrationFactory.register.options();
                     optionsPromise
                         .then(function (response) {
-                            scope.fields = response.data.actions.POST;
+                            scope.fields = response.data.actions && response.data.actions.POST;
                         });
 
                     scope.register = function () {
