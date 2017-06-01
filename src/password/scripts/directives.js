@@ -77,7 +77,7 @@
                     // If there is a URL fragment named `token` in the current route then
                     // we shall assume we are changing a forgotten password.
                     // If it does not exist, then we are updating a password.
-                    var TOKEN = $route.current.pathParams.token;
+                    var TOKEN = $route.current && $route.current.pathParams && $route.current.pathParams.token;
 
                     var optionsPromise;
                     if (angular.isDefined(TOKEN)) {
