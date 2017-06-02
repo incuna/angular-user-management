@@ -3,7 +3,7 @@
 
 (function () {
 
-    var helpers = window._helpers = window._helpers || {};
+    var helpers = window._helpers = (window._helpers || {});
 
     helpers.testModuleDependencies = function (moduleName) {
 
